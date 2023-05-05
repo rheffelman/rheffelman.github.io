@@ -1,9 +1,8 @@
 @font-face {
     font-family: BlexMono;
-    src: url(BlexMonoNerdFont-Regular.ttf) format(ttf);
+    src: url(fonts/BlexMonoNerdFont-Regular.ttf) format(ttf);
 }
-
 p {
-    font-family: 'BlexMono', sans-serif;
+    font-family: BlexMono, sans-serif;
     font-size: 45px;
 }
