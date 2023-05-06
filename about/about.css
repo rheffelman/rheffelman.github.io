@@ -1,0 +1,47 @@
+@font-face {
+    font-family: BlexMono;
+    src: url(../fonts/BlexMonoNerdFont-Regular.ttf) format(truetype);
+
+    font-family: swedensans;
+    src: url(../fonts/Gilroy-Bold.ttf) format(truetype);
+}
+header {
+    background-color: #1d2125;
+    color: #d1d5da;
+    padding: 10px;
+    border-bottom: 1px solid #000000;
+  }
+h1 {
+    font-family: swedensans;
+    font-size: 35;
+    text-align: center;
+}
+h2 {
+    font-family: swedensans;
+    font-size: 55px;
+    position: absolute;
+    top: 15px;
+}
+ul {
+    font-family: swedensans;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+a {
+    font-size: 25;
+    text-decoration: none;
+    color: #d1d5da;
+    display: block;
+}
+li {
+    display: inline-block;
+    margin-right: 20px;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #24292e;
+}
