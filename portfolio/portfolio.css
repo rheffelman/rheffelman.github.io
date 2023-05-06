@@ -3,7 +3,23 @@
     src: url(../fonts/BlexMonoNerdFont-Regular.ttf) format(truetype);
 
     font-family: swedensans;
-    src: url(../fonts/Gilroy-Bold.ttf) format(truetype);
+    src: url(../fonts/swedensans.ttf) format(truetype);
+}
+.half-screen-width {
+max-width: 100%;
+height: auto;
+}
+.image-container {
+    width: 100%;
+    overflow: hidden;
+}
+#anticipation {
+    float: left;
+    width: 50%;
+}
+#empathy {
+    float: right;
+    width: 50%;
 }
 header {
     background-color: #1d2125;
@@ -11,16 +27,16 @@ header {
     padding: 10px;
     border-bottom: 1px solid #000000;
     text-align: center;
-  }
+}
 h1 {
     font-family: swedensans;
     font-size: 35;
 }
 h2 {
     font-family: swedensans;
-    font-size: 55px;
-    position: absolute;
-    top: 15px;
+    font-size: 35px;
+    position: relative;
+    top: 0px;
 }
 ul {
     font-family: swedensans;

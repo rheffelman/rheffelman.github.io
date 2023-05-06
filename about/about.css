@@ -3,7 +3,7 @@
     src: url(../fonts/BlexMonoNerdFont-Regular.ttf) format(truetype);
 
     font-family: swedensans;
-    src: url(../fonts/Gilroy-Bold.ttf) format(truetype);
+    src: url(../fonts/swedensans.ttf) format(truetype);
 }
 header {
     background-color: #1d2125;
@@ -18,9 +18,10 @@ h1 {
 }
 h2 {
     font-family: swedensans;
-    font-size: 55px;
-    position: absolute;
-    top: 15px;
+    font-size: 35px;
+    position: relative;
+    top: 0px;
+    text-align: center;
 }
 ul {
     font-family: swedensans;
