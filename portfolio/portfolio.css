@@ -21,6 +21,14 @@ height: auto;
     float: right;
     width: 50%;
 }
+#nostalgia {
+    float: right;
+    width: 50%;
+}
+#envy {
+    float: left;
+    width: 50%;
+}
 header {
     background-color: #1d2125;
     color: #d1d5da;
