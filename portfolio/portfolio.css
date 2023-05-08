@@ -10,25 +10,51 @@ max-width: 100%;
 height: auto;
 }
 .image-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1d2125;
+    border: 1px solid #000000;
+    padding: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  .image-container2 {
+    display: flex;
+    justify-content: center;
+    flex: wrap;
+    align-items: center;
+    background-color: #1d2125;
+    border: 1px solid #000000;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .image-container3 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1d2125;
+    border: 1px solid #000000;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  .image-container img {
+    width: 50%;
+    height: auto;
+  }
+  .image-container2 img {
     width: 100%;
-    overflow: hidden;
-}
-#anticipation {
-    float: left;
+    height: auto;
+  }
+  .image-container3 img {
     width: 50%;
-}
-#empathy {
-    float: right;
-    width: 50%;
-}
-#nostalgia {
-    float: right;
-    width: 50%;
-}
-#envy {
-    float: left;
-    width: 50%;
-}
+    height: 80%;
+    object-fit: cover;
+  }
 header {
     background-color: #1d2125;
     color: #d1d5da;
@@ -43,6 +69,14 @@ header {
     padding: 1rem;
     width: 50px;
     height: 50px;
+  }
+  .monogram img {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    padding: 1rem;
+    width: 100px;
+    height: auto;
   }
 h1 {
     font-family: swedensans;

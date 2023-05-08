@@ -10,6 +10,8 @@
     padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
+    border-top: 1px solid #000000;
+    margin-top: 20px;
 }
 .pdf-container embed {
     position: absolute;
