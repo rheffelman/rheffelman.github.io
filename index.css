@@ -15,7 +15,6 @@
     margin-bottom: 5px;
     margin-top: 20px;
   }
-  
   .profile-img {
     width: 200px;
     height: auto;
@@ -23,17 +22,14 @@
     margin-right: 20px;
     flex: 0 0 auto;
   }
-  
   .profile-img img {
     width: 100%;
     height: auto;
     display: block;
   }
-  
   .summary-text {
     flex: 1;
   }
-  
   .summary-text p {
     max-width: 400px;
     font-size: 16px;
@@ -42,7 +38,6 @@
     text-indent: 30px;
     font-family: swedensans;
   }
-  
   @media screen and (max-width: 768px) {
     .summary-container {
       flex-direction: column;
@@ -54,13 +49,11 @@
     background-color: #1d2125;
     border: 1px solid #000000;
   }
-  
   .dogs-section h2 {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
   }
-  
   .dogs-section p {
     font-family: swedensans;
     color: #d1d5da;
@@ -68,13 +61,11 @@
     font-size: 16px;
     margin-bottom: 20px;
   }
-  
   .dogs-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 0px;
   }
-  
   .dogs-grid img {
     width: 100%;
     height: auto;
@@ -85,13 +76,13 @@ header {
     color: #d1d5da;
     padding: 10px;
   }
-  abc img{
+  .github-icon img{
     position: absolute;
     top: 0;
     right: 0;
     padding: 1rem;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
   }
 h1 {
     font-family: swedensans;
