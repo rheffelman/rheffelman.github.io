@@ -3,24 +3,81 @@
     src: url(fonts/BlexMonoNerdFont-Regular.ttf) format(truetype);
 
     font-family: swedensans;
-    src: url(fonts/swedensans.ttf) format(truetype);
+    src: url(fonts/Gilroy-Bold.ttf) format(truetype);
 }
-.half-screen-width {
-max-width: 100%;
-height: auto;
-}
-.image-container {
+.summary-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #1d2125;
+    border: 1px solid #000000;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .profile-img {
+    width: 200px;
+    height: auto;
+    border-radius: 1%;
+    margin-right: 20px;
+    flex: 0 0 auto;
+  }
+  
+  .profile-img img {
     width: 100%;
-    overflow: hidden;
-}
-#anticipation {
-    float: left;
-    width: 50%;
-}
-#empathy {
-    float: right;
-    width: 50%;
-}
+    height: auto;
+    display: block;
+  }
+  
+  .summary-text {
+    flex: 1;
+  }
+  
+  .summary-text p {
+    max-width: 400px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #d1d5da;
+    text-indent: 30px;
+    font-family: swedensans;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .summary-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  .dogs-section {
+    margin-top: 20px;
+    background-color: #1d2125;
+    border: 1px solid #000000;
+  }
+  
+  .dogs-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .dogs-section p {
+    font-family: swedensans;
+    color: #d1d5da;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .dogs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0px;
+  }
+  
+  .dogs-grid img {
+    width: 100%;
+    height: auto;
+  }
 header {
     background-color: #1d2125;
     color: #d1d5da;

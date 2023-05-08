@@ -3,7 +3,7 @@
     src: url(../fonts/BlexMonoNerdFont-Regular.ttf) format(truetype);
 
     font-family: swedensans;
-    src: url(../fonts/swedensans.ttf) format(truetype);
+    src: url(../fonts/Gilroy-Bold.ttf) format(truetype);
 }
 header {
     background-color: #1d2125;
@@ -25,7 +25,6 @@ h2 {
 }
 ul {
     font-family: swedensans;
-
     margin: 0;
     padding: 0;
     list-style: none;
@@ -45,4 +44,29 @@ body {
     margin: 0;
     padding: 0;
     background-color: #24292e;
+}
+div {
+    text-align: center;
+    margin-top: 10px;
+}
+email1 {
+    font-family: swedensans;
+    color: #d1d5da;
+    font-size: 1.2em;
+}
+email2 {
+    font-family: swedensans;
+    color: #d1d5da;
+    font-size: 1.2em;
+}
+discord {
+    font-family: swedensans;
+    color: #d1d5da;
+    font-size: 1.2em;
+    padding-bottom: 50px;
+}
+snap {
+    font-family: swedensans;
+    color: #d1d5da;
+    font-size: 1.2em;
 }
