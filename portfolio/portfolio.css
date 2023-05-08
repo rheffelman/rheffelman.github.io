@@ -36,6 +36,14 @@ header {
     border-bottom: 1px solid #000000;
     text-align: center;
 }
+abc img{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    width: 50px;
+    height: 50px;
+  }
 h1 {
     font-family: swedensans;
     font-size: 35;

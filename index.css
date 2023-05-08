@@ -13,6 +13,7 @@
     border: 1px solid #000000;
     padding: 5px;
     margin-bottom: 5px;
+    margin-top: 20px;
   }
   
   .profile-img {
@@ -79,9 +80,18 @@
     height: auto;
   }
 header {
+  position: relative;
     background-color: #1d2125;
     color: #d1d5da;
     padding: 10px;
+  }
+  abc img{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    width: 100px;
+    height: 100px;
   }
 h1 {
     font-family: swedensans;
