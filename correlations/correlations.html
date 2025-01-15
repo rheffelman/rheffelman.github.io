@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WMD</title>
+    <link rel="stylesheet" type="text/css" href="correlations.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script>
+        function convertMarkdown() {
+            let converter = new showdown.Converter({ simpleLineBreaks: true });
+            let markdownText = document.getElementById("markdown-content").textContent;
+            document.getElementById("markdown-output").innerHTML = converter.makeHtml(markdownText);
+        }
+
+        window.onload = function () {
+            convertMarkdown();
+        };
+    </script>
+    <style>
+        #markdown-output img {
+            width: 40%;
+            height: auto;
+            display: block;
+            margin: 10px auto; /* Centers the image */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a class="github-icon" href="https://github.com/rheffelman/rheffelman.github.io">
+            <img src="../materials/github-mark-white.png" alt="GitHub icon">
+        </a>
+        <a class="monogram" href="../index.html">
+            <img src="../materials/monogram-white.png" alt="monogram">
+        </a>
+        <h1>Ryan Heffelman</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../portfolio/portfolio.html">Portfolio</a></li>
+                <li><a href="../about/about.html">About</a></li>
+                <li><a href="../contact/contact.html">Contact</a></li>
+                <li><a href="../WMD/WMD.html">WMD</a></li>
+                <li><a href="correlations.html">Correlations</a></li>
+            </ul>
+        </nav>
+        <h2>Correlations</h2>
+    </header>
+
+    <main>
+        <!-- Hidden raw Markdown -->
+        <script type="text/markdown" id="markdown-content">
+### Correlations are relationships between two or more variables.  
+That's it, just relationships.  
+There's a relationship between each variable in every dataset ever created.  
+
+![Alt text](../materials/ss1.png)
+
+Many correlations are completely and utterly meaningless.
+Some, however, are not. One particularly useful kind of correlation
+is a linear correlation
+
+        </script>
+
+        <!-- Converted HTML output -->
+        <div id="markdown-output"></div>
+    </main>
+</body>
+</html>
