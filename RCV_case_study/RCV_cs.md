@@ -1,11 +1,33 @@
-# 1.
-### Correlations are relationships between two or more variables.  
-That's it, just relationships.  
-Essentially it highlights a correlation between the construction of 5g towers and Covid-19
-cases breaking out. Suspicious, right? Well no, it's clear that while the data does somewhat
-correlate, you might **also** notice that the data correlates roughly with the population density
-in the United States, as well as the locations of major cities. Doesn't it seem more plausible
-that the people constructing 5g towers would focus on major cities so that they can reach the
-most amount of people? And that major cities would have more Covid-19 cases because they have
-more people? To me, it seems absurd to conclude that this data implies that 5g towers cause
-Covid-19, but to other people, this was their actual belief that they took just as seriously as 
+<!-- # Info:
+1. "RCV" stands for Ranked-Choice Voting, a kind of voting system where voters rank candidates in order of preference.
+2. This page is a case study regarding an article that can be found [here](https://www.cogitatiopress.com/politicsandgovernance/article/view/3913). -->
+# Info:
+1. **"RCV"** stands for Ranked-Choice Voting, a kind of voting system where voters rank candidates in order of preference.
+2. This page is a case study regarding an article that can be found [here](https://www.cogitatiopress.com/politicsandgovernance/article/view/3913).
+
+---
+
+## Why Ranked-Choice Voting?
+- It reduces the likelihood of **vote splitting**.
+- Promotes **majority support**.
+- Encourages **candidates to appeal to a broader audience**.
+
+---
+
+### Case Study Highlights:
+1. **Location**: This case study focuses on RCV implementation in *San Francisco*.
+2. **Outcome**: Improved voter turnout and reduced negative campaigning.
+3. **Challenges**: Initial voter confusion about ranking candidates.
+
+---
+
+### Key Statistics:
+- **2002**: RCV adopted in San Francisco.
+- **2020**: Over **20 cities** in the U.S. use RCV.
+- **95%** of voters in RCV elections say the ballot was easy to understand.
+
+---
+
+#### Further Reading:
+- [FairVote: Benefits of Ranked-Choice Voting](https://www.fairvote.org/rcv)
+- [RCV in Action](https://www.rankthevote.us/)

@@ -1,47 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RCV Case Study</title>
     <link rel="stylesheet" type="text/css" href="RCV_case_study.css">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script> -->
-    <script>
-        function convertMarkdown() {
-            let converter = new showdown.Converter({ simpleLineBreaks: true });
-            let markdownText = document.getElementById("markdown-content").textContent;
-            document.getElementById("markdown-output").innerHTML = converter.makeHtml(markdownText);
-        }
-
-        window.onload = function () {
-            convertMarkdown();
-        };
-    </script>
-    <style>
-        #markdown-output img {
-            width: 40%;
-            height: auto;
-            display: block;
-            margin: 10px auto; 
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
 </head>
 <body>
     <header>
         <a class="github-icon" href="https://github.com/rheffelman/rheffelman.github.io">
             <img src="../materials/github-mark-white.png" alt="GitHub icon">
         </a>
-
         <h1>Ryan Heffelman</h1>
         <nav>
             <ul>
-
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="../portfolio/portfolio.html">Portfolio</a></li>
                 <li><a href="../about/about.html">About</a></li>
                 <li><a href="../contact/contact.html">Contact</a></li>
                 <li><a href="../WMD/WMD.html">WMD</a></li>
                 <li><a href="../correlations/correlations.html">Correlations</a></li>
-                <li><a href="./RCV_case_study.html"></a>RCV Case Study</li>
-
+                <li><a href="./RCV_case_study.html">RCV Case Study</a></li>
             </ul>
         </nav>
         <h2>Ranked-Choice Voting Case Study</h2>
@@ -49,25 +29,19 @@
 
     <main>
         <div id="markdown-content"></div>
-
-
-
     </main>
-            <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
-        <script>
-        // Create the converter
-        const converter = new showdown.Converter();
 
-        // Fetch the local Markdown file
-        fetch('RCV_cs.md')   // Path to the .md file on *your* server
-            .then(response => response.text())
-            .then(markdown => {
-                // Convert Markdown to HTML
-                const html = converter.makeHtml(markdown);
-                // Inject into the page
-                document.getElementById('markdown-content').innerHTML = html;
-            })
-            .catch(err => console.error('Error fetching or converting .md file:', err));
-</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const converter = new showdown.Converter();
+            fetch('RCV_cs.md')
+                .then(response => response.text())
+                .then(markdown => {
+                    const html = converter.makeHtml(markdown);
+                    document.getElementById('markdown-content').innerHTML = html;
+                })
+                .catch(err => console.error('Error fetching Markdown:', err));
+        });
+    </script>
 </body>
 </html>
