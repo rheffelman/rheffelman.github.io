@@ -22,7 +22,7 @@ Note: They collected many more variables than just age, they collected things li
 
 
 ### **Conclusions:**
-- They found that only age and difficulty ranking candidates are significant predictors of under-voting. Here's a plot of the relationship they found:
+- They found that only `age` and `difficulty ranking candidates` are significant predictors of under-voting. Here's a plot of the relationship they found:
 
 ![RCV_plot_2](../materials/RCV_Plot_2.png)
 (Coll, 2021, p.303)<br>
