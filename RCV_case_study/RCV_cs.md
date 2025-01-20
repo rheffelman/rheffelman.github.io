@@ -39,13 +39,7 @@ Note: They collected many more variables than just age, they collected things li
 
 ## What I Believe The Article Does Poorly:
 
-### 1. A nitpicky definitional complaint:
--  I think it's wrong to qualify RCV as being *more* difficult than traditional voting. I think it's more correct to say RCV is *equally or more* difficult compared to FPTP. This is because the bare-minimum RCV ballot is directly convertible to an FPTP ballot, and any FPTP ballot is convertible to an RCV ballot.
-
-![RCV_FPTP_diagram](../materials/rcv_dia_4-edit.png)
-- The set of FPTP ballots is a subset of the set of RCV ballots, so RCV ballots are either equivalent in complexity/difficulty, or they're more complex/difficult. This is significant because if an individual finds RCV too difficult, they can submit an FPTP ballot and still have their opinion taken into consideration (although that's a whole other ethical can of worms).
-
-### 3. A data-oriented problem:
+### 1. A data-oriented problem:
 
 "*Further, these difficulties have been assumed to cause individuals to improperly fill out RCV ballots, such as ranking too many or not enough candidates.*" (Coll, 2021, p.293).
 
@@ -56,7 +50,13 @@ Note: They collected many more variables than just age, they collected things li
 
     3. Because a significant portion of the kinds of voters who under-vote are missing from the data, I don't think there is sufficient evidence to suggest this causal relationship.
 
-### 2. "*Difficulty*" might be used in two different senses:
+### 2. A nitpicky definitional complaint:
+-  I think it's wrong to qualify RCV as being *more* difficult than traditional voting. I think it's more correct to say RCV is *equally or more* difficult compared to FPTP. This is because the bare-minimum RCV ballot is directly convertible to an FPTP ballot, and any FPTP ballot is convertible to an RCV ballot.
+
+![RCV_FPTP_diagram](../materials/rcv_dia_4-edit.png)
+- The set of FPTP ballots is a subset of the set of RCV ballots, so RCV ballots are either equivalent in complexity/difficulty, or they're more complex/difficult. This is significant because if an individual finds RCV too difficult, they can submit an FPTP ballot and still have their opinion taken into consideration (although that's a whole other ethical can of worms).
+
+### 3. "*Difficulty*" might be used in two different senses:
 
 - There's difficulty as in inherent complexity of the system. In RCV there are more boxes to check and more of your opinion to share. This *usually* results in a *more* complex system, although in my opinion, still not a particularly complex system.
 
