@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>?</title>
+    <style>
+        @font-face {
+            font-family: 'Gilroy-Bold';
+            src: url('fonts/Gilroy-Bold.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1C1C1C;
+        }
+        .container {
+    position: relative; /* This makes it the reference for its absolutely positioned children */
+    height: 1000px; /* Set a fixed height */
+    width: 1020px; /* Adjust the width to accommodate the canvas and any margins */
+    margin: auto; /* Center the container horizontally */
+    top: 40%; /* Center the container vertically */
+    transform: translateY(-50%); /* Adjust the vertical positioning */
+}
+
+canvas, .pixel-count {
+    position: absolute; /* Absolute positioning relative to their parent */
+}
+
+canvas {
+    left: 0; /* Align the canvas to the left */
+}
+
+.pixel-count {
+    left: 1010px; /* Position the text right after the canvas, adjust as needed */
+    top: 0;
+    font-family: 'Gilroy-Bold', sans-serif;
+    font-size: 30px;
+    white-space: nowrap; /* Prevent line breaks */
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="bordaCanvas" width="1000" height="1000"></canvas>
+        <div id="pixelCounts" class="pixel-count"></div>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('bordaCanvas');
+        const ctx = canvas.getContext('2d');
+        const resolution = 10;
+        canvas.width = 1000;
+        canvas.height = 1000;
+        const COLS = canvas.width / resolution;
+        const ROWS = canvas.height / resolution;
+        const candidates = ['A', 'B', 'C', 'D', 'E']; // Example candidates
+        const votingData = [
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['E', 'B', 'D', 'C', 'A'],
+    ['E', 'B', 'D', 'C', 'A'],
+    ['E', 'B', 'D', 'C', 'A'],
+    ['E', 'B', 'D', 'C', 'A'],
+    ['E', 'B', 'D', 'C', 'A'],
+    ['E', 'B', 'D', 'C', 'A']
+];
+
+        function initializeGrid() {
+            const grid = [];
+            for (let i = 0; i < COLS; i++) {
+                const column = [];
+                for (let j = 0; j < ROWS; j++) {
+                    const randomIndex = Math.floor(Math.random() * votingData.length);
+                    column.push(votingData[randomIndex].slice()); // Copy the array to avoid reference issues
+                }
+                grid.push(column);
+            }
+            return grid;
+        }
+
+        function renderGrid(grid) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+    const pixelCountsElement = document.getElementById('pixelCounts');
+    pixelCountsElement.innerHTML = ''; // Clear previous pixel counts
+    const pixelCounts = calculatePixelCounts(grid);
+    
+    for (let col = 0; col < COLS; col++) {
+        for (let row = 0; row < ROWS; row++) {
+            const cell = grid[col][row];
+            const color = getColorFromRanking(cell[0]); // Use the top candidate for color representation
+            ctx.fillStyle = color;
+            ctx.fillRect(col * resolution, row * resolution, resolution, resolution);
+        }
+    }
+
+    // Display pixel counts on the right side
+    candidates.forEach((candidate, index) => {
+        const count = pixelCounts[candidate];
+        const candidateDiv = document.createElement('div');
+        candidateDiv.textContent = `${candidate}: ${count/100}`;
+        candidateDiv.style.color = getColorFromRanking(candidate); // Set text color based on candidate
+        pixelCountsElement.appendChild(candidateDiv);
+    });
+}
+
+        function calculatePixelCounts(grid) {
+            const pixelCounts = { 'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0 };
+
+            for (let col = 0; col < COLS; col++) {
+                for (let row = 0; row < ROWS; row++) {
+                    const cell = grid[col][row];
+                    const color = getColorFromRanking(cell[0]);
+                    if (color !== 'white') {
+                        pixelCounts[cell[0]] += resolution * resolution;
+                    }
+                }
+            }
+
+            return pixelCounts;
+        }
+
+        function getColorFromRanking(candidate) {
+            switch (candidate) {
+                case 'A':
+                    return '#227C9D';
+                case 'B':
+                    return '#17C3B2';
+                case 'C':
+                    return '#FFCB77';
+                case 'D':
+                    return '#FEF9EF';
+                case 'E':
+                    return '#FE6D73';
+                default:
+                    return 'white';
+            }
+        }
+
+        function calculateBordaScores(grid, x, y) {
+            const bordaScores = { 'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0 }; // Initialize Borda scores
+
+            // Calculate Borda scores based on neighbors
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    const neighborX = x + i;
+                    const neighborY = y + j;
+                    if (neighborX >= 0 && neighborX < COLS && neighborY >= 0 && neighborY < ROWS) {
+                        const neighborRanking = grid[neighborX][neighborY];
+                        for (let k = 0; k < candidates.length; k++) {
+                            const candidate = candidates[k];
+                            bordaScores[candidate] += calculateBordaPoints(neighborRanking.indexOf(candidate), k);
+                        }
+                    }
+                }
+            }
+
+            return bordaScores;
+        }
+
+        function calculateBordaPoints(rankIndex, position) {
+            // Borda points calculation, higher points for higher rank positions
+            return candidates.length - 1 - rankIndex;
+        }
+
+        function updateGrid(grid) {
+            const nextGrid = JSON.parse(JSON.stringify(grid)); // Create a deep copy of the grid
+
+            // Update rankings based on Borda scores
+            for (let col = 0; col < COLS; col++) {
+                for (let row = 0; row < ROWS; row++) {
+                    const bordaScores = calculateBordaScores(grid, col, row);
+                    const sortedCandidates = candidates.slice().sort((a, b) => bordaScores[b] - bordaScores[a]); // Sort candidates by Borda scores
+                    nextGrid[col][row] = sortedCandidates;
+                }
+            }
+
+            return nextGrid;
+        }
+
+        function simulateElection() {
+            let grid = initializeGrid();
+            let frameRate = 5; // Adjust frame rate (lower value for slower animation)
+
+            function animate() {
+                grid = updateGrid(grid);
+                renderGrid(grid);
+                setTimeout(() => {
+                    requestAnimationFrame(animate);
+                }, 1000 / frameRate); // Convert frame rate to milliseconds
+            }
+
+            animate();
+        }
+
+        simulateElection();
+    </script>
+</body>
+</html>

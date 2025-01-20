@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copeland's Method Cellular Automaton</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="copelandCanvas"></canvas>
+
+    <script>
+        // Canvas setup
+        const canvas = document.getElementById('copelandCanvas');
+        const ctx = canvas.getContext('2d');
+        const resolution = 20;
+        const COLS = Math.floor(canvas.width / resolution);
+        const ROWS = Math.floor(canvas.height / resolution);
+        const candidates = ['A', 'B', 'C', 'D', 'E']; // Example candidates
+
+        canvas.width = COLS * resolution;
+        canvas.height = ROWS * resolution;
+
+        // Initial grid setup
+        let grid = initializeGrid();
+
+        // Function to initialize the grid with random preferences
+        function initializeGrid() {
+            const grid = [];
+            for (let i = 0; i < COLS; i++) {
+                const col = [];
+                for (let j = 0; j < ROWS; j++) {
+                    // Randomize preferences over candidates
+                    const preferences = shuffleCandidates(candidates.slice());
+                    col.push(preferences);
+                }
+                grid.push(col);
+            }
+            return grid;
+        }
+
+        // Function to shuffle candidate preferences randomly
+        function shuffleCandidates(candidates) {
+            return candidates.sort(() => Math.random() - 0.5);
+        }
+
+        // Function to render the grid on canvas
+        function renderGrid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let col = 0; col < COLS; col++) {
+                for (let row = 0; row < ROWS; row++) {
+                    const preferences = grid[col][row];
+                    const topCandidate = preferences[0]; // Display the top candidate
+                    ctx.fillStyle = getColorFromCandidate(topCandidate);
+                    ctx.fillRect(col * resolution, row * resolution, resolution, resolution);
+                }
+            }
+        }
+
+        // Function to get color based on candidate
+        function getColorFromCandidate(candidate) {
+            switch (candidate) {
+                case 'A': return 'blue';
+                case 'B': return 'green';
+                case 'C': return 'red';
+                case 'D': return 'yellow';
+                case 'E': return 'purple';
+                default: return 'white';
+            }
+        }
+
+        // Function to simulate one step of Copeland's method
+        function simulateCopeland() {
+    // Initialize scores for Copeland's method
+    const scores = initializeScores();
+
+    // Count pairwise victories
+    for (let col = 0; col < COLS; col++) {
+        for (let row = 0; row < ROWS; row++) {
+            const preferences = grid[col][row];
+            for (let i = 0; i < preferences.length; i++) {
+                for (let j = i + 1; j < preferences.length; j++) {
+                    const candidate1 = preferences[i];
+                    const candidate2 = preferences[j];
+                    if (candidates.indexOf(candidate1) < candidates.indexOf(candidate2)) {
+                        scores[candidate1]++;
+                    } else if (candidates.indexOf(candidate1) > candidates.indexOf(candidate2)) {
+                        scores[candidate2]++;
+                    }
+                }
+            }
+        }
+    }
+
+    // Determine winners based on Copeland's scores
+    const winners = determineWinners(scores);
+
+    // Update grid with winners as top preferences
+    for (let col = 0; col < COLS; col++) {
+        for (let row = 0; row < ROWS; row++) {
+            grid[col][row] = [winners[0]]; // Assuming the desire is to set the top candidate as the winner for all
+        }
+    }
+
+    // Render updated grid
+    renderGrid();
+
+    // Repeat simulation
+    setTimeout(simulateCopeland, 1000); // Adjust time interval as needed
+}
+
+function initializeScores() {
+    const scores = {};
+    candidates.forEach(candidate => {
+        scores[candidate] = 0;
+    });
+    return scores;
+}
+
+function determineWinners(scores) {
+    const sortedCandidates = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+    const maxScore = scores[sortedCandidates[0]];
+    const winners = sortedCandidates.filter(candidate => scores[candidate] === maxScore);
+    return winners;
+}
+
+        // Start simulation
+        simulateCopeland();
+    </script>
+</body>
+</html>

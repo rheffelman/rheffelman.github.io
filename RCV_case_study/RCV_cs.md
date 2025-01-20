@@ -24,7 +24,7 @@ Note: They collected many more variables than just age, they collected things li
 ### **Conclusions:**
 - They found that only age and difficulty ranking candidates are significant predictors of under-voting. Here's a plot of the relationship they found:
 
-![RCV_plot_2](../materials/RCV_plot_2.png)
+![RCV_plot_2](../materials/RCV_Plot_2.png)
 (Coll, 2021, p.303)<br>
 - They didn't find the evidence to support that any particular racial, ethnic, or socioeconomic groups find RCV to be more difficult than any other.
 

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>pl</title>
+    <style>
+        canvas { border: 1px solid black; }
+    </style>
+</head>
+<body>
+<canvas id="pluralityCanvas" width="500" height="500"></canvas>
+<script>
+const canvas = document.getElementById('pluralityCanvas');
+const ctx = canvas.getContext('2d');
+const resolution = 10;
+canvas.width = 550;
+canvas.height = 550;
+const COLS = canvas.width / resolution;
+const ROWS = canvas.height / resolution;
+const candidates = ['A', 'B', 'C', 'D', 'E']; // Example candidates
+const votingData = [
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['A', 'D', 'E', 'C', 'B'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['B', 'E', 'D', 'C', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['C', 'B', 'E', 'D', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['D', 'C', 'E', 'B', 'A'],
+    ['E', 'B', 'D', 'C', 'A'],
+    ['E', 'B', 'D', 'C', 'A'],
+    ['E', 'B', 'D', 'C', 'A'],
+    ['E', 'B', 'D', 'C', 'A'],
+    ['E', 'B', 'D', 'C', 'A'],
+    ['E', 'B', 'D', 'C', 'A']
+];
+
+function initializeGrid() {
+    const grid = [];
+    for (let i = 0; i < COLS; i++) {
+        const column = [];
+        for (let j = 0; j < ROWS; j++) {
+            const randomIndex = Math.floor(Math.random() * votingData.length);
+            column.push(votingData[randomIndex][0]); // Store only the top candidate
+        }
+        grid.push(column);
+    }
+    return grid;
+}
+
+function renderGrid(grid) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+    for (let col = 0; col < COLS; col++) {
+        for (let row = 0; row < ROWS; row++) {
+            const candidate = grid[col][row];
+            const color = getColorFromCandidate(candidate);
+            ctx.fillStyle = color;
+            ctx.fillRect(col * resolution, row * resolution, resolution, resolution);
+        }
+    }
+}
+
+function getColorFromCandidate(candidate) {
+    // Assign colors based on candidates
+    switch (candidate) {
+        case 'A':
+            return '#227C9D';
+        case 'B':
+            return '#17C3B2';
+        case 'C':
+            return '#FFCB77';
+        case 'D':
+            return '#FEF9EF';
+        case 'E':
+            return '#FE6D73';
+        default:
+            return 'white';
+    }
+}
+
+function countVotes(grid, x, y) {
+    const voteCounts = { 'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0 };
+
+    // Count votes based on neighbors
+    for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+            const neighborX = x + i;
+            const neighborY = y + j;
+            if (neighborX >= 0 && neighborX < COLS && neighborY >= 0 && neighborY < ROWS) {
+                const candidate = grid[neighborX][neighborY];
+                voteCounts[candidate]++;
+            }
+        }
+    }
+
+    return voteCounts;
+}
+
+function updateGrid(grid) {
+    const nextGrid = [];
+
+    // Update grid based on vote counts
+    for (let col = 0; col < COLS; col++) {
+        const column = [];
+        for (let row = 0; row < ROWS; row++) {
+            const voteCounts = countVotes(grid, col, row);
+            const topCandidate = Object.keys(voteCounts).reduce((a, b) => voteCounts[a] > voteCounts[b] ? a : b);
+            column.push(topCandidate);
+        }
+        nextGrid.push(column);
+    }
+
+    return nextGrid;
+}
+
+function simulateElection() {
+    let grid = initializeGrid();
+    let frameRate = 5;
+
+    function animate() {
+        grid = updateGrid(grid);
+        renderGrid(grid);
+        setTimeout(() => {
+            requestAnimationFrame(animate);
+        }, 5000 / frameRate);
+    }
+
+    animate();
+}
+
+simulateElection();
+</script>
+</body>
+</html>
