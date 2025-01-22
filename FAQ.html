@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RCV Case Study</title>
+    <title>FAQ</title>
     <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
     <style>
         @font-face {
@@ -150,16 +150,16 @@
         <h1>Ryan Heffelman</h1>
         <nav>
             <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../portfolio/portfolio.html">Portfolio</a></li>
-                <li><a href="../about/about.html">About</a></li>
-                <li><a href="../contact/contact.html">Contact</a></li>
-                <li><a href="../WMD/WMD.html">WMD</a></li>
-                <li><a href="../correlations/correlations.html">Correlations</a></li>
-                <li><a href="./RCV_case_study.html">RCV Case Study</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio/portfolio.html">Art Portfolio</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="WMD.html">WMD</a></li>
+                <li><a href="correlations.html">Correlations</a></li>
+                <li><a href="RCV_case_study.html">RCV Case Study</a></li>
             </ul>
         </nav>
-        <h2>Ranked-Choice Voting Case Study</h2>
+        <h2>FAQ</h2>
     </header>
 
     <main>
@@ -169,7 +169,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const converter = new showdown.Converter();
-            fetch('RCV_cs.md')
+            fetch('markdowns/FAQ.md')
                 .then(response => response.text())
                 .then(markdown => {
                     const html = converter.makeHtml(markdown);

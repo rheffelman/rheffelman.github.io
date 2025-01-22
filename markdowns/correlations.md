@@ -1,4 +1,3 @@
-# 1.
 ### Correlations are relationships between two or more variables.  
 That's it, just relationships.  
 There's a relationship between each variable in every dataset ever created.  
@@ -7,11 +6,14 @@ There's a relationship between each variable in every dataset ever created.
 
 Many correlations are completely and utterly meaningless.
 Some, however, are not. One particularly useful kind of correlation
-is a linear correlation.
+is a linear correlation:
 
-# 2.
+![correlation_examples](../materials/correlation.png)
+
+&nbsp;&nbsp;&nbsp;&nbsp;Linear correlations are sometimes useful because they *can* give you a hint that some kind of causal or dependent relationship might exist. As we will see, with linear correlation it's also possible that the two variables aren't causally related to one another, but instead both indirectly related by a third variable. It's also possible that there is simply no meaningful relationship between two variables whether that be direct or indirect, yet there is a strong correlation.
+
 One of the most dangerous examples of confusing correlation with causation
-that occured in my lifetime is the 5g Covid-19 conspiracy, caused by a real correlation
+that occurred in my lifetime is the 5g Covid-19 conspiracy, caused by a real correlation
 that some people believed to be causation.
 
 ![Alt text](../materials/lol.jpg)
@@ -37,8 +39,6 @@ lead to more covid cases and more deaths. All it takes is 1 reckless sick person
 to many more people, due to how viruses spread exponentially. Also it leads to a distrust in government,
 which is sometimes a good thing, but I believe the government ought not to be trusted when they have broken
 the publics trust, and in this case they haven't.
-
-# 3. 
 
 ### The relationship could be modeled like this:
 
