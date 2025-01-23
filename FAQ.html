@@ -4,22 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ</title>
+
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+MathJax = {
+    tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true // Allows escaping dollar signs
+    },
+    options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+};
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+
     <style>
         @font-face {
             font-family: BlexMono;
             src: url(fonts/BlexMonoNerdFont-Regular.ttf) format(truetype);
+        }
 
+        @font-face {
             font-family: gilroy;
             src: url(../fonts/Gilroy-Bold.ttf) format(truetype);
         }
+
         /* General Body Styling */
         body {
             margin: 0;
             padding: 0;
             background-color: #24292e;
             color: #d1d5da;
-            font-family: gilroy, Arial, sans-serif; /* Default font */
+            font-family: gilroy, Arial, sans-serif;
             line-height: 1.8;
         }
 
@@ -83,12 +103,13 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             color: #d1d5da;
-            font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; /* Use a separate font for Markdown content */
+            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+            overflow-x: auto; /* Enable horizontal scrolling */
         }
 
         /* Markdown-specific Styles */
-        #markdown-content h1, 
-        #markdown-content h2, 
+        #markdown-content h1,
+        #markdown-content h2,
         #markdown-content h3 {
             color: #ffffff;
             margin-top: 1rem;
@@ -99,16 +120,16 @@
             margin: 1rem 0;
         }
 
-        #markdown-content ul, 
+        #markdown-content ul,
         #markdown-content ol {
-            list-style: initial; /* Display default bullets/numbers */
+            list-style: initial;
             margin-left: 20px;
             padding-left: 20px;
         }
 
         #markdown-content li {
             margin-bottom: 0.5rem;
-            text-align: left; /* Align list items properly */
+            text-align: left;
         }
 
         #markdown-content a {
@@ -124,21 +145,50 @@
             border-radius: 5px;
         }
 
-        /* Optional styling for inline code */
         #markdown-content code {
             background-color: #2d333b;
             color: #ffffff;
             padding: 2px 4px;
             border-radius: 4px;
-            font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+            font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
         }
 
-        /* Optional styling for blockquote */
         #markdown-content blockquote {
             border-left: 4px solid #1a73e8;
             padding-left: 15px;
             color: #b0b7c3;
             margin: 1rem 0;
+        }
+
+        /* Table Styling */
+        #markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            display: block;
+            overflow-x: auto; /* Enable horizontal scrolling */
+        }
+
+        #markdown-content th,
+        #markdown-content td {
+            border: 1px solid #444;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        #markdown-content th {
+            background-color: #2d333b;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        #markdown-content table::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        #markdown-content table::-webkit-scrollbar-thumb {
+            background-color: #444;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -166,17 +216,44 @@
         <div id="markdown-content"></div>
     </main>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const converter = new showdown.Converter();
-            fetch('markdowns/FAQ.md')
-                .then(response => response.text())
-                .then(markdown => {
-                    const html = converter.makeHtml(markdown);
-                    document.getElementById('markdown-content').innerHTML = html;
-                })
-                .catch(err => console.error('Error fetching Markdown:', err));
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const converter = new showdown.Converter({
+            tables: true,
+            simplifiedAutoLink: true,
+            strikethrough: true,
+            tasklists: true
         });
-    </script>
+
+        fetch('markdowns/FAQ.md')
+            .then(response => response.text())
+            .then(markdown => {
+                const html = converter.makeHtml(markdown);
+                const contentElement = document.getElementById('markdown-content');
+                contentElement.innerHTML = html;
+
+                // Wait for MathJax to initialize, then render
+                MathJax.startup.promise.then(() => {
+                    MathJax.typeset([contentElement]);
+                }).catch(err => console.error('MathJax rendering error:', err));
+            })
+            .catch(err => console.error('Error fetching Markdown:', err));
+    });
+</script>
+
 </body>
 </html>

@@ -18,3 +18,4 @@ epiphanies:
 - how hard these data scientists work to be certain, as a counterpoint of weapons of math destruction
 
 
+                                                                                                                                                                                                                                                                                  
