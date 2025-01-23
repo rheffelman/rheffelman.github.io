@@ -5,6 +5,10 @@
     font-family: swedensans;
     src: url(fonts/Gilroy-Bold.ttf) format(truetype);
 }
+@font-face {
+            font-family: ss;
+            src: url(fonts/SwedenSansRegular.otf) format(truetype);
+        }
 .summary-container {
     display: flex;
     flex-direction: row;
@@ -36,7 +40,7 @@
     line-height: 1.5;
     color: #d1d5da;
     text-indent: 30px;
-    font-family: swedensans;
+    font-family: ss;
   }
   @media screen and (max-width: 768px) {
     .summary-container {
@@ -55,7 +59,7 @@
     margin-bottom: 10px;
   }
   .dogs-section p {
-    font-family: swedensans;
+    font-family: ss;
     color: #d1d5da;
     text-align: center;
     font-size: 16px;
@@ -97,11 +101,11 @@ header {
     height: auto;
   }
 h1 {
-    font-family: swedensans;
+    font-family: ss;
     font-size: 35;
 }
 ul {
-    font-family: swedensans;
+    font-family: ss;
 
     margin: 0;
     padding: 0;
