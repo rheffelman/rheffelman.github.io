@@ -10,19 +10,8 @@ Don't take my word for it, this is data science, if I'm trying to convince you o
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**\#3.** Algorithmically test the model on many different combinations of inputs and outputs, keeping track of which ones the model has the most trouble with.
 
 When I attempted this, here were my findings:
-```
-Top 10 worst predictions:
-a=1050, b=230, expected=1276, predicted=960, error=316
-a=1050, b=240, expected=1258, predicted=964, error=294
-a=1050, b=200, expected=1234, predicted=950, error=284
-a=1050, b=250, expected=1248, predicted=967, error=281
-a=1050, b=160, expected=1210, predicted=936, error=274
-a=1050, b=210, expected=1224, predicted=953, error=271
-a=800, b=220, expected=1020, predicted=750, error=270
-a=1050, b=220, expected=1222, predicted=957, error=265
-a=1100, b=180, expected=1272, predicted=1009, error=263
-a=800, b=210, expected=1010, predicted=749, error=261
-```
+
+![error_mag](../materials/error_magnitude.png)
 
 As you can see the model is a lot worse at predicting outputs on inputs that are divisible by 5. In other words, the model discriminates against certain *kinds* of numbers, even though it's input type is non-discriminatory (it takes 2 of any integer, it doesn't take the kind of integer into consideration). This is obviously because in step \#1 we made sure that the data did not include any integers divisible by 5, but nonetheless proves that the original claim is false.
 

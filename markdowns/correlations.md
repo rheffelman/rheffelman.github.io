@@ -40,14 +40,15 @@ to many more people, due to how viruses spread exponentially. Also it leads to a
 which is sometimes a good thing, but I believe the government ought not to be trusted when they have broken
 the publics trust, and in this case they haven't.
 
-### The relationship could be modeled like this:
+### A conspiracy theorists view of the relationship could be modeled like this:
+Where a green box represents a cause, an orange box represents an effect, a solid red arrow represents a causal relationship, and a dotted red arrow represents a correlative relationship.
 
-![Alt text](../materials/tex1.png)
+![Alt text](../materials/1.png)
 
 ### However, equally as implied by the data is this model:
 
-![Alt text](../materials/tex2.png)
+![Alt text](../materials/2.png)
 
 ### I believe the truth is more likely to be something like this:
 
-![Alt text](../materials/tex3.png)
+![Alt text](../materials/3.png)
