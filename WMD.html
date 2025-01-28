@@ -175,7 +175,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const converter = new showdown.Converter();
-            fetch('markdowns/about.md')
+            fetch('markdowns/WMD.md')
                 .then(response => response.text())
                 .then(markdown => {
                     const html = converter.makeHtml(markdown);
