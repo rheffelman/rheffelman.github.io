@@ -5,7 +5,7 @@ Don't take my word for it, this is data science, if I'm trying to convince you o
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**\#1.** Generate a dataset of numbers [[$a$, $b$], [$a$, $b$], ...] such that $a$ and $b$ are random unsigned integers not divisible by 5.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**\#2.** Define and train a neural net such that, when given $a$ and $b$ it tries to predict $a$ XOR $b$. [(Bitwise XOR)](https://en.wikipedia.org/wiki/Bitwise_operation). Make sure it is sufficiently complex, I'd say at least $(2 \rightarrow 2 \rightarrow 2 \rightarrow 1)$, What I used was $(2 \rightarrow 16 \rightarrow 16 \rightarrow 1)$.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**\#2.** Define and train a neural net such that, when given $a$ and $b$ it tries to predict ($a$ XOR $b$). [(Bitwise XOR)](https://en.wikipedia.org/wiki/Bitwise_operation). Make sure it is sufficiently complex, I'd say at least $(2 \rightarrow 2 \rightarrow 2 \rightarrow 1)$, What I used was $(2 \rightarrow 16 \rightarrow 16 \rightarrow 1)$.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**\#3.** Algorithmically test the model on many different combinations of inputs and outputs, keeping track of which ones the model has the most trouble with.
 
