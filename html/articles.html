@@ -225,7 +225,6 @@ MathJax = {
                 const contentElement = document.getElementById('markdown-content');
                 contentElement.innerHTML = html;
 
-                // Wait for MathJax to initialize, then render
                 MathJax.startup.promise.then(() => {
                     MathJax.typeset([contentElement]);
                 }).catch(err => console.error('MathJax rendering error:', err));
