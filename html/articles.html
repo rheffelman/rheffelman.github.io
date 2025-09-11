@@ -218,7 +218,7 @@ MathJax = {
             tasklists: true
         });
 
-        fetch('markdowns/FAQ.md')
+        fetch('../markdowns/FAQ.md')
             .then(response => response.text())
             .then(markdown => {
                 const html = converter.makeHtml(markdown);
