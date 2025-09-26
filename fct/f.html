@@ -3,12 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Recipe Graph Visualizer (Static)</title>
+<title>Factorio Recipe Graph Visualizer</title>
 <style>
   :root { --bg:#121212; --panel:#1e1e1e; --border:#333; --muted:#aaa; --text:#eee; }
   html, body { margin:0; padding:0; height:100%; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial; }
   h1 { margin:0; padding:.6rem 1rem; font-size:1.2rem; border-bottom:1px solid var(--border); }
-  /* Two columns: left panel + graph (right panel removed) */
   #layout { display:grid; grid-template-columns: 340px 1fr; grid-template-rows: calc(100vh - 2.4rem); }
   #left, #center { height:100%; overflow:hidden; }
   #left { background:var(--panel); border-left:1px solid var(--border); border-right:1px solid var(--border); }
@@ -19,7 +18,6 @@
 <script type="module">
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-/* --------- Utils ---------- */
 const ICON_BASE = "./factorio_icons";
 const slug = s => s.toLowerCase().replace(/\s+/g,"_").replace(/-/g,"_").replace(/[^\w_]/g,"");
 const isFluid = name => ['water','oil','gas','fluid','steam','brine','acid','ammonia','fluoroketone']
@@ -27,13 +25,10 @@ const isFluid = name => ['water','oil','gas','fluid','steam','brine','acid','amm
 const RAW_ITEMS = new Set(["coal","stone","iron-ore","copper-ore","water","crude-oil"]);
 const normId = s => String(s).toLowerCase().replace(/\s+/g, "-");
 
-/* --------- DATA ---------- */
 const DATA = JSON.parse(document.getElementById("data-json").textContent || '{"items":[],"recipes":[]}');
 
-/* Optional hard preferences: map OUTPUT ITEM -> RECIPE ID to force canonical selection */
 const PREFERRED_RECIPES = {};
 
-/* Indexes */
 const itemById = new Map(DATA.items.map(i=>[i.id, i]));
 const recipesByOutputItem = new Map();
 for (const r of DATA.recipes) {
@@ -51,7 +46,7 @@ function chooseBestRecipeFor(itemId){
     const byId = list.find(r => String(r.id) === String(preferred));
     if (byId) return byId;
   }
-  // heuristic: fewest inputs → lowest craft_time → lowest id
+  // heuristic: fewest inputs -> lowest craft_time -> lowest id
   return list.slice().sort((a,b)=>{
     const ai=a.inputs.length, bi=b.inputs.length;
     if (ai!==bi) return ai-bi;
@@ -61,7 +56,6 @@ function chooseBestRecipeFor(itemId){
   })[0];
 }
 
-/* Build the dependency graph recursively */
 function buildGraph(selectedRecipeIds, includeAlternatives){
   const nodesMap = new Map();
   const links = [];
@@ -91,7 +85,7 @@ function buildGraph(selectedRecipeIds, includeAlternatives){
 
     for (const inp of recipe.inputs) {
       const itemId = normId(inp.item);
-      if (RAW_ITEMS.has(itemId)) continue; // stop at raws
+      if (RAW_ITEMS.has(itemId)) continue;
       const producers = recipesByOutputItem.get(itemId) || [];
       if (producers.length === 0) continue;
 
@@ -104,7 +98,6 @@ function buildGraph(selectedRecipeIds, includeAlternatives){
     }
   };
 
-  // seed
   for (const rid of selectedRecipeIds) {
     const r = DATA.recipes.find(x=>String(x.id)===String(rid));
     if (!r) continue;
@@ -112,7 +105,6 @@ function buildGraph(selectedRecipeIds, includeAlternatives){
     expandRecipe(r, 0);
   }
 
-  // merge duplicate edges
   const merged = new Map();
   for (const L of links) {
     const key = `${L.source}→${L.target}`;
@@ -123,7 +115,6 @@ function buildGraph(selectedRecipeIds, includeAlternatives){
   return { nodes: Array.from(nodesMap.values()), links: Array.from(merged.values()) };
 }
 
-/* --------- Components ---------- */
 class RecipeGraph extends HTMLElement {
   constructor(){ super(); this.attachShadow({mode:'open'}); }
   connectedCallback(){
@@ -167,7 +158,6 @@ class RecipeGraph extends HTMLElement {
       .selectAll("circle").data(nodes.filter(n=>n.isRoot)).join("circle")
       .attr("r",25).attr("fill","white").attr("opacity",0.3);
 
-    // Wrap each node in a <g>, add cyan fallback circle + image
     const nodeG = layer.append("g")
       .selectAll("g.node")
       .data(nodes)
@@ -176,14 +166,13 @@ class RecipeGraph extends HTMLElement {
       .call(d3.drag()
         .on("start", ev=>{ if(!ev.active) sim.alphaTarget(0.3).restart(); ev.subject.fx=ev.subject.x; ev.subject.fy=ev.subject.y; })
         .on("drag",  ev=>{ ev.subject.fx=ev.x; ev.subject.fy=ev.y; })
-        .on("end",   ev=>{ if(!ev.active) sim.alphaTarget(0); /* keep fx/fy so it stays roughly where dragged */ })
+        .on("end",   ev=>{ if(!ev.active) sim.alphaTarget(0); })
       );
 
-    // cyan fallback (shown only if icon fails)
     nodeG.append("circle")
       .attr("r", d => d.isRoot ? 18 : 12)
       .attr("fill", "#6cf")
-      .attr("data-fallback", "0")  // 0 hidden, 1 visible
+      .attr("data-fallback", "0")
       .style("display", "none");
 
     const img = nodeG.append("image")
@@ -192,7 +181,6 @@ class RecipeGraph extends HTMLElement {
       .attr("x", d=>d.isRoot?-18:-12).attr("y", d=>d.isRoot?-18:-12)
       .attr("class", d=>d.isRoot?"primary-node":"")
       .each(function(){
-        // probe image loading to toggle fallback
         const el = this;
         const test = new Image();
         test.onload = ()=>{/* ok */};
@@ -219,7 +207,6 @@ class RecipeGraph extends HTMLElement {
 }
 customElements.define("recipe-graph", RecipeGraph);
 
-/* --- Search list matching your “other one”, with cyan fallback + default visualize --- */
 class RecipeList extends HTMLElement {
   constructor() {
     super();
@@ -229,7 +216,6 @@ class RecipeList extends HTMLElement {
   }
 
   connectedCallback() {
-    // Use static DATA instead of fetch('/api/recipes')
     this.recipes = DATA.recipes.map(r => ({ recipe_id: r.id, recipe_name: r.name }));
 
     this.shadowRoot.innerHTML = `
@@ -326,7 +312,6 @@ class RecipeList extends HTMLElement {
         const div = document.createElement('div');
         div.className = 'selected-item';
 
-        // icon with fallback cyan dot
         const icon = document.createElement('img');
         icon.src = `${ICON_BASE}/${slug(name)}.png`;
         icon.alt = name;
@@ -355,14 +340,12 @@ class RecipeList extends HTMLElement {
       }
     };
 
-    // Default visualize from NAME(s)
-    const DEFAULT_NAMES = ["advanced-circuit"]; // change as needed
+    const DEFAULT_NAMES = ["advanced-circuit"];
     for (const want of DEFAULT_NAMES) {
       const hit = this.recipes.find(r => r.recipe_name.toLowerCase() === want.toLowerCase());
       if (hit) this.selected.set(hit.recipe_id, hit.recipe_name);
     }
 
-    // Show defaults and auto-dispatch once the DOM is ready
     if (this.selected.size > 0) {
       renderSelected();
       const ids = Array.from(this.selected.keys());
@@ -383,7 +366,6 @@ class RecipeList extends HTMLElement {
         const div = document.createElement('div');
         div.className = 'result-item';
 
-        // icon with fallback cyan dot
         const icon = document.createElement('img');
         icon.src = `${ICON_BASE}/${slug(match.recipe_name)}.png`;
         icon.alt = match.recipe_name;
@@ -426,7 +408,6 @@ class RecipeList extends HTMLElement {
 }
 customElements.define('recipe-list', RecipeList);
 
-/* --------- Page wiring ---------- */
 window.addEventListener("DOMContentLoaded", ()=>{
   const list=document.querySelector("recipe-list");
   const graphEl=document.querySelector("recipe-graph");
@@ -447,7 +428,6 @@ window.addEventListener("DOMContentLoaded", ()=>{
     <div id="center"><recipe-graph></recipe-graph></div>
   </div>
 
-  <!-- Replace with your full dataset -->
   <script id="data-json" type="application/json">
   {
   "items": [
