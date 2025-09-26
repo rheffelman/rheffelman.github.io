@@ -215,24 +215,28 @@ MathJax = {
   html, body {
     height: 100%;
     margin: 0;
-    background: #24292e; /* your theme */
-    overflow: hidden;
+    background: #24292e;
+    overflow: hidden; /* no scrollbars */
   }
   main {
     height: 100%;
-    display: grid;
-    place-items: center; /* center horizontally + vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* center horizontally + vertically */
   }
   #viz-outer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #1d2125;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,.3);
-    overflow: hidden;
+    padding: 0;
+    overflow: visible; /* let scaled viz expand */
   }
-  /* Native dashboard size (from Tableau settings) */
   #viz-scale {
-    width: 1200px;   /* replace with your dashboard’s real width */
-    height: 800px;   /* replace with your dashboard’s real height */
+    width: 1200px;  /* native Tableau width */
+    height: 800px;  /* native Tableau height */
     transform-origin: top left;
   }
   #viz {
@@ -244,20 +248,16 @@ MathJax = {
 
 <script>
 (function () {
-  const NATIVE_W = 1200;  // your dashboard width
-  const NATIVE_H = 800;   // your dashboard height
+  const NATIVE_W = 1200;
+  const NATIVE_H = 800;
 
   function fit() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
-    // available space for middle third
-    const maxW = vw / 3;
-    const maxH = vh / 3;
-
-    // scale uniformly so viz fits into 1/3rd box
-    const sx = maxW / NATIVE_W;
-    const sy = maxH / NATIVE_H;
+    // scale so the viz fits within one-third of viewport, whichever dimension is limiting
+    const sx = (vw / 3) / NATIVE_W;
+    const sy = (vh / 3) / NATIVE_H;
     const s = Math.min(sx, sy);
 
     document.getElementById('viz-scale').style.transform = `scale(${s})`;
@@ -267,6 +267,7 @@ MathJax = {
   window.addEventListener('resize', fit);
 })();
 </script>
+
 
 
 
