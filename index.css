@@ -218,3 +218,96 @@ body {
   object-fit: cover;
   object-position: center center;
 }
+/* Safety resets */
+* { box-sizing: border-box; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Featured list */
+.list {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap, 16px);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* height fallback + var() */
+  height: 160px;
+  height: var(--row-h, 160px);
+  padding: 14px 0 14px 14px;
+  background: var(--panel, #1d2125);
+  border: 1px solid var(--row-border, #0f1215);
+  transition: transform .08s ease, box-shadow .08s ease, background .12s ease;
+  outline: 2px solid transparent;
+}
+
+.row:hover {
+  background: var(--row-hover, #2a3036);
+  outline-color: var(--outline, #6ea8fe);
+  box-shadow: 0 4px 14px rgba(0,0,0,.35);
+  transform: translateY(-1px);
+}
+
+.meta {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 20px;
+  min-width: 0;
+}
+
+.title{
+  font-family: gilroy, ss, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--title, #90D5FF);
+}
+
+.desc{
+  color: var(--text-muted, #aeb6c2);
+  font-family: ss;
+  font-size: .98rem;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 80ch;
+}
+
+/* Thumbnail column: fixed size no matter what */
+.thumb {
+  /* flex-basis fallback + var() */
+  flex: 0 0 160px;
+  flex: 0 0 var(--row-h, 160px);
+  height: 160px;
+  height: var(--row-h, 160px);
+  overflow: hidden;
+  background: var(--thumb-bg, #13161a);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.langs { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.langs img { width: 28px; height: 28px; display: block; }
+
+@media (max-width: 640px){
+  .row { height: auto; align-items: flex-start; padding: 12px; flex-direction: column; }
+  .thumb { width: 100%; height: 160px; flex: 0 0 auto; }
+}
