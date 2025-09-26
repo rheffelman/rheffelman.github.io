@@ -10,11 +10,8 @@ Computer Scientist/Data Scientist
   - C  
   - JavaScript  
   - ARM Assembly
-- **Have significant experience with, but not a fan of**  
-  - Ruby  
-  - Clojure  
   - R
-- **Misc (markdown languages, data formats)**  
+## Misc (markdown languages, data formats)**  
   - HTML/CSS  
   - GitHub Markdown  
   - LaTeX  
