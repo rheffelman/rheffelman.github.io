@@ -104,7 +104,7 @@ html, body {
   /* set original size + scale per instance via inline CSS vars */
   --w: 1920;         /* original dashboard width in px */
   --h: 1080;         /* original dashboard height in px */
-  --scale: 0.75;      /* visual scale (0.5 = 50%) */
+  /* --scale: 0.75;      visual scale (0.5 = 50%) */
 
   /* center horizontally */
   display: flex;
@@ -148,7 +148,6 @@ html, body {
             <ul>
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="../html/about.html">About</a></li>
-                <li><a href="../html/articles.html">Articles</a></li>
                 <li><a href="../html/projects.html">Projects</a></li>
             </ul>
         </nav>
@@ -157,7 +156,7 @@ html, body {
 
 
 <!-- Viz 1 -->
-<div class="viz-wrap" style="--w:1920; --h:1080; --scale:0.5;">
+<div class="viz-wrap" style="--w:1920; --h:1080; --scale:0.8;">
   <div class="viz-scaler">
     <tableau-viz
       class="viz"
@@ -170,7 +169,7 @@ html, body {
 </div>
 
 <!-- Viz 2 -->
-<div class="viz-wrap" style="--w:1920; --h:1080; --scale:0.5;">
+<div class="viz-wrap" style="--w:1920; --h:1080; --scale:0.8;">
   <div class="viz-scaler">
     <tableau-viz
       class="viz"
