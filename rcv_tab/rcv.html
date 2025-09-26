@@ -240,6 +240,37 @@ main { padding: 0; }
   </div>
 </main>
 
+<script>
+(function () {
+  const NATIVE_W = 1920;
+  const NATIVE_H = 1080;
+
+  function fit() {
+    const header = document.querySelector('header');
+    const headerH = header ? header.offsetHeight : 0;
+    const outer = document.getElementById('viz-outer');
+    const scaleBox = document.getElementById('viz-scale');
+
+    // update CSS var so #viz-outer uses the right height
+    outer.style.setProperty('--header-h', headerH + 'px');
+
+    // available drawing area
+    const availW = outer.clientWidth;
+    const availH = outer.clientHeight;
+
+    // scale to fit BOTH width and height (no scrollbars)
+    const sx = availW / NATIVE_W;
+    const sy = availH / NATIVE_H;
+    const s = Math.min(sx, sy);
+
+    scaleBox.style.transform = `scale(${s})`;
+  }
+
+  // Run after layout settles, and on resize/orientation
+  window.addEventListener('load', fit);
+  window.addEventListener('resize', fit);
+})();
+</script>
 
 
 
