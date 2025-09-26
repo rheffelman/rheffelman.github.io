@@ -4,190 +4,161 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Projects</title>
-
+  <link rel="stylesheet" href="../header.css">
   <style>
-    @font-face { font-family: BlexMono; src: url(../fonts/BlexMonoNerdFont-Regular.ttf) format(truetype); }
-    @font-face { font-family: ss;       src: url(../fonts/SwedenSansRegular.otf) format(truetype); }
-    @font-face { font-family: gilroy;   src: url(../fonts/Gilroy-Bold.ttf) format(truetype); }
-
-    :root{
-      --bg:#24292e;
-      --panel:#1d2125;
-      --text:#d1d5da;
-      --text-muted:#aeb6c2;
-      --outline:#6ea8fe;
-      --row-border:#0f1215;
-      --row-hover:#2a3036;
-      --thumb-bg:#13161a;
-      --title:#90D5FF;
-      --row-h:180px;
-      --gap:16px;
+    /* Page-specific extras */
+    main {
+      display:flex;
+      justify-content:center;
+      padding:24px;
     }
-
-    *{ box-sizing:border-box; }
-
-    body{
-      margin:0; padding:0;
-      background:var(--bg); color:var(--text);
-      font-family:ss, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
-      line-height:1.6;
+    .list {
+      width:100%;
+      max-width:1000px;
+      display:flex;
+      flex-direction:column;
+      gap:var(--gap);
     }
-
-    a{ color:inherit; text-decoration:none; }
-
-    header{
-      position:relative;
-      background:var(--panel);
-      color:var(--text);
-      padding:20px;
-      border-bottom:1px solid #000;
-      text-align:center;
-    }
-    header h1{ margin:0; font-size:2.2rem; }
-    header h1 a{ text-decoration:none; }
-    header h2{ margin:6px 0 0; font-size:1.4rem; color:var(--text-muted); }
-    header nav ul{ display:inline-flex; list-style:none; gap:20px; padding:0; margin:10px 0 0; }
-    header nav a{ font-size:1rem; }
-    header .github-icon img{
-      position:absolute; top:10px; right:10px; width:50px; height:50px;
-    }
-
-    main{
-      display:flex; justify-content:center; padding:24px;
-    }
-
-    .list{
-      width:100%; max-width:1000px;
-      display:flex; flex-direction:column; gap:var(--gap);
-    }
-
     .row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: var(--row-h);
-      padding: 14px 0 14px 14px;
-      background: var(--panel);
-      border: 1px solid var(--row-border);
-      transition: transform .08s ease, box-shadow .08s ease, background .12s ease;
-      outline: 2px solid transparent;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      height:var(--row-h);
+      padding:14px 0 14px 14px;
+      background:var(--panel);
+      border:1px solid var(--row-border);
+      transition:transform .08s ease, box-shadow .08s ease, background .12s ease;
+      outline:2px solid transparent;
     }
     .row:hover {
-      background: var(--row-hover);
-      outline-color: var(--outline);
-      box-shadow: 0 4px 14px rgba(0,0,0,.35);
-      transform: translateY(-1px);
+      background:var(--row-hover);
+      outline-color:var(--outline);
+      box-shadow:0 4px 14px rgba(0,0,0,.35);
+      transform:translateY(-1px);
     }
-
     .meta {
-      flex: 1 1 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding-right: 20px;
-      min-width: 0;
+      flex:1 1 auto;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      padding-right:20px;
+      min-width:0;
     }
-
-    .title{
+    .title {
       font-family:gilroy, ss, sans-serif;
-      font-size:1.5rem; font-weight:700; line-height:1.2;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-      color: var(--title);
+      font-size:1.5rem;
+      font-weight:700;
+      line-height:1.2;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      color:var(--title);
     }
-    .desc{
+    .desc {
       color:var(--text-muted);
-      font-size:.98rem; line-height:1.45;
-      display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;
+      font-size:.98rem;
+      line-height:1.45;
+      display:-webkit-box;
+      -webkit-line-clamp:3;
+      -webkit-box-orient:vertical;
       overflow:hidden;
       max-width:80ch;
     }
-
-    .langs{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;
+    .langs {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:4px;
     }
-    .langs img{
+    .langs img {
       width:32px; height:32px; display:block;
     }
-
     .thumb {
-      flex: 0 0 var(--row-h);
-      height: 100%;
-      overflow: hidden;
-      background: var(--thumb-bg);
+      flex:0 0 var(--row-h);
+      height:100%;
+      overflow:hidden;
+      background:var(--thumb-bg);
     }
     .thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
     }
-
     @media (max-width:640px){
       .row{ height:auto; align-items:flex-start; padding:12px; flex-direction:column; }
       .meta{ padding-right:0; }
       .thumb{ width:100%; height:180px; flex:0 0 auto; }
     }
+        .page-title {
+      max-width: 1000px;
+      margin: 24px auto 0;
+      padding: 0 16px;
+      font-family: gilroy, ss, sans-serif;
+      font-size: 1.6rem;
+      color: var(--title);
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <a class="github-icon" href="https://github.com/rheffelman/rheffelman.github.io">
-      <img src="../materials/github-mark-white.png" alt="GitHub icon" />
+<header>
+  <a class="github-icon" href="https://github.com/rheffelman/rheffelman.github.io">
+    <img src="../materials/github-mark-white.png" alt="GitHub icon" />
+  </a>
+  <h1><a href="../index.html">rheffelman.github.io</a></h1>
+  <nav>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="./about.html">About Me</a></li>
+      <li><a href="./projects.html">Projects</a></li>
+    </ul>
+  </nav>
+</header>
+  <div class="page-title">Projects</div>
+<main>
+  <div class="list" id="list"></div>
+</main>
+
+<script>
+  const PROJECTS = [
+    {
+      title: "Factorio Crafting Graph Visualization.",
+      href: "../fct/f.html",
+      img: "../fct/fct.png",
+      desc: "Uses web components and d3js to generate an interactive visualization of the crafting graph for any given item in Factorio.",
+      langs: [
+        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg"
+      ]
+    },
+    {
+      title: "RCV Data Analysis",
+      href: "../rcv_tab/rcv.html",
+      img: "../rcv_tab/rcv2.png",
+      desc: "Some cool interactive data visualizations regarding the 2018 Maine congressional ranked-choice voting election.",
+      langs: [
+        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg"
+      ]
+    }
+  ];
+
+  const list = document.getElementById("list");
+  list.innerHTML = PROJECTS.map(p => `
+    <a class="row" href="${p.href}" aria-label="${p.title}">
+      <div class="meta">
+        <div class="title">${p.title}</div>
+        <div class="desc">${p.desc ?? ""}</div>
+        <div class="langs">
+          ${p.langs.map(url => `<img src="${url}" alt="language icon">`).join("")}
+        </div>
+      </div>
+      <div class="thumb">
+        ${p.img ? `<img src="${p.img}" alt="">` : ""}
+      </div>
     </a>
-    <h1><a href="../index.html">rheffelman.github.io</a></h1>
-    <nav>
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="./about.html">About Me</a></li>
-        <li><a href="./projects.html">Projects</a></li>
-      </ul>
-    </nav>
-    <h2>Projects</h2>
-  </header>
-
-  <main>
-    <div class="list" id="list"></div>
-  </main>
-
-  <script>
-    const PROJECTS = [
-      {
-        title: "Factorio Crafting Graph Visualization.",
-        href: "../fct/f.html",
-        img: "../fct/fct.png",
-        desc: "Uses web components and d3js to generate an interactive visualization of the crafting graph for any given item in Factorio.",
-        langs: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg"
-        ]
-      },
-      {
-        title: "RCV Data Analysis",
-        href: "../rcv_tab/rcv.html",
-        img: "../rcv_tab/rcv2.png",
-        desc: "Some cool interactive data visualizations regarding the 2018 Maine congressional ranked-choice voting election.",
-        langs: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg",
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg"
-        ]
-      }
-    ];
-
-    const list = document.getElementById("list");
-    list.innerHTML = PROJECTS.map(p => `
-      <a class="row" href="${p.href}" aria-label="${p.title}">
-        <div class="meta">
-          <div class="title">${p.title}</div>
-          <div class="desc">${p.desc ?? ""}</div>
-          <div class="langs">
-            ${p.langs.map(url => `<img src="${url}" alt="language icon">`).join("")}
-          </div>
-        </div>
-        <div class="thumb">
-          ${p.img ? `<img src="${p.img}" alt="">` : ""}
-        </div>
-      </a>
-    `).join("");
-  </script>
+  `).join("");
+</script>
 </body>
 </html>

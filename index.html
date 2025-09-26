@@ -1,85 +1,128 @@
 <!DOCTYPE html>
-<html>
-    <link rel="stylesheet" type="text/css" href="index.css">
-  <head>
-    <title>rheffelman.github.io</title>
-    <style>
-    </style>
-  </head>
-  <body>
-    <header>
-      <a class="github-icon" href="https://github.com/rheffelman/rheffelman.github.io">
-        <img src="materials/github-mark-white.png" alt="GitHub icon">
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>rheffelman.github.io</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="./header.css">
+</head>
+<body>
+<header>
+  <a class="github-icon" href="https://github.com/rheffelman/rheffelman.github.io">
+    <img src="./materials/github-mark-white.png" alt="GitHub icon" />
+  </a>
+  <h1><a href="./index.html">rheffelman.github.io</a></h1>
+  <nav>
+    <ul>
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="./html/about.html">About Me</a></li>
+      <li><a href="./html/projects.html">Projects</a></li>
+    </ul>
+  </nav>
+</header>
 
-      <h1>
-        <a href="index.html">rheffelman.github.io</a>
-      </h1>
 
-      <nav>
-        <ul>
-          <li><a href="./html/about.html">About Me</a></li>
-          <li><a href = "./html/projects.html">Projects</a></li>
-
-        </ul>
-      </nav>
-    </header>
-    <div class="image-container">
+  <main>
+    <!-- Intro -->
+    <div class="summary-container">
+      <div class="profile-img">
+        <img src="materials/me2.jpg" alt="Ryan">
+      </div>
+      <div class="summary-text">
+        <p>
+          Hi! My name is Ryan Heffelman. I'm a Computer Scientist and a Data Scientist, with degrees from Carthage College.
+          This is my website where I put cool things that I do and I want to show off, mostly CS/DS related.
+          <br><br>
+          P.S. there is an easter egg hidden somewhere on this website. The first one to find it and contact me about it wins a mystery prize.
+        </p>
+      </div>
     </div>
-    <main>
-      <div class ="summary-container">
-        <div class="profile-img">
-          <img src ="materials/me2.jpg" alt="Ryan">
-        </div>
-        <div class="summary-text">
-          <p>Hi! My name is Ryan Heffelman. I'm a Computer Scientist and a Data Scientist, with degrees from Carthage College. This is my website where I put cool things that I do and I want to show off, mostly CS/DS related.
-            <br><br>
-            P.S. there is an easter egg hidden somewhere on this website. The first one to find it and contact me about it wins a mystery prize.
-          </p>
-        </div>
+
+    <h2 class="section-title">Featured Projects:</h2>
+    <div class="list" id="featured-list"></div>
+
+    <!-- Dogs -->
+    <div class="dogs-section">
+      <p>I have a dog. Please look at these pictures of her:</p>
+      <div class="gallery">
+        <img src="materials/dog1.jpg" alt="dog-1">
+        <img src="materials/dog2.jpeg" alt="dog-2">
+        <img src="materials/dog3.jpg" alt="dog-3">
+        <img src="materials/dog4.jpg" alt="dog-4">
+        <img src="materials/dog5.jpg" alt="dog-5">
+        <img src="materials/dog6.jpg" alt="dog-6">
+        <img src="materials/dog7.jpg" alt="dog-7">
+        <img src="materials/dog8.jpg" alt="dog-8">
+        <img src="materials/dog9.jpg" alt="dog-9">
+        <img src="materials/dog10.jpg" alt="dog-10">
+        <img src="materials/dog11.jpg" alt="dog-11">
+        <img src="materials/dog12.jpg" alt="dog-12">
+        <img src="materials/dog13.jpg" alt="dog-13">
+        <img src="materials/dog14.jpg" alt="dog-14">
+        <img src="materials/dog15.jpg" alt="dog-15">
+        <img src="materials/dog16.jpg" alt="dog-16">
+        <img src="materials/dog17.jpg" alt="dog-17">
+        <img src="materials/dog18.jpg" alt="dog-18">
+        <img src="materials/dog19.jpg" alt="dog-19">
+        <img src="materials/dog20.jpg" alt="dog-20">
+        <img src="materials/dog21.jpg" alt="dog-21">
+        <img src="materials/dog22.jpg" alt="dog-22">
+        <img src="materials/dog23.jpg" alt="dog-23">
+        <img src="materials/dog24.jpg" alt="dog-24">
+        <img src="materials/dog25.jpg" alt="dog-25">
+        <img src="materials/dog26.jpg" alt="dog-26">
+        <img src="materials/dog27.jpg" alt="dog-27">
+        <img src="materials/dog28.jpg" alt="dog-28">
+        <img src="materials/dog29.jpg" alt="dog-29">
+        <img src="materials/dog30.jpg" alt="dog-30">
+        <img src="materials/dog31.jpg" alt="dog-31">
+        <img src="materials/dog32.jpg" alt="dog-32">
       </div>
-            <div class ="summary-container">
+    </div>
+  </main>
+
+  <script>
+    // Keep this structure aligned with your projects page for consistency.
+    const FEATURED = [
+      {
+        title: "Factorio Crafting Graph Visualization.",
+        href: "./fct/f.html",
+        img: "./fct/fct.png",
+        desc: "Interactive D3 graph of Factorio recipes; explore dependency trees and craft chains.",
+        langs: [
+          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg"
+        ]
+      },
+      {
+        title: "RCV Data Analysis",
+        href: "./rcv_tab/rcv.html",
+        img: "./rcv_tab/rcv2.png",
+        desc: "Visual exploration of Maine’s 2018 ranked-choice election with interactive Tableau.",
+        langs: [
+          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg",
+          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg"
+        ]
+      }
+      // Add more featured items as needed
+    ];
+
+    const mount = document.getElementById("featured-list");
+    mount.innerHTML = FEATURED.map(p => `
+      <a class="row" href="${p.href}" aria-label="${p.title}">
+        <div class="meta">
+          <div class="title">${p.title}</div>
+          <div class="desc">${p.desc ?? ""}</div>
+          <div class="langs">
+            ${(p.langs || []).map(url => `<img src="${url}" alt="language icon">`).join("")}
+          </div>
         </div>
-        <div class="summary-text">
-          <p>Featured Articles/Projects:</p>
+        <div class="thumb">
+          ${p.img ? `<img src="${p.img}" alt="">` : ""}
         </div>
-      </div>
-      <div class="dogs-section">
-        <p>I have a dog. Please look at these pictures of her:</p>
-        <div class="gallery">
-          <img src="materials/dog1.jpg" alt="dog-1">
-          <img src="materials/dog2.jpeg" alt="dog-2">
-          <img src="materials/dog3.jpg" alt="dog-3">
-          <img src="materials/dog4.jpg" alt="dog-4">
-          <img src="materials/dog5.jpg" alt="dog-5">
-          <img src="materials/dog6.jpg" alt="dog-6">
-          <img src="materials/dog7.jpg" alt="dog-7">
-          <img src="materials/dog8.jpg" alt="dog-8">
-          <img src="materials/dog9.jpg" alt="dog-9">
-          <img src="materials/dog10.jpg" alt="dog-10">
-          <img src="materials/dog11.jpg" alt="dog-11">
-          <img src="materials/dog12.jpg" alt="dog-12">
-          <img src="materials/dog13.jpg" alt="dog-13">
-          <img src="materials/dog14.jpg" alt="dog-14">
-          <img src="materials/dog15.jpg" alt="dog-15">
-          <img src="materials/dog16.jpg" alt="dog-16">
-          <img src="materials/dog17.jpg" alt="dog-17">
-          <img src="materials/dog18.jpg" alt="dog-18">
-          <img src="materials/dog19.jpg" alt="dog-19">
-          <img src="materials/dog20.jpg" alt="dog-20">
-          <img src="materials/dog21.jpg" alt="dog-21">
-          <img src="materials/dog22.jpg" alt="dog-22">
-          <img src="materials/dog23.jpg" alt="dog-23">
-          <img src="materials/dog24.jpg" alt="dog-24">
-          <img src="materials/dog25.jpg" alt="dog-25">
-          <img src="materials/dog26.jpg" alt="dog-26">
-          <img src="materials/dog27.jpg" alt="dog-27">
-          <img src="materials/dog28.jpg" alt="dog-28">
-          <img src="materials/dog29.jpg" alt="dog-29">
-          <img src="materials/dog30.jpg" alt="dog-30">
-          <img src="materials/dog31.jpg" alt="dog-31">
-          <img src="materials/dog32.jpg" alt="dog-32">
-        </div>
-      </div>
-    </main>
-  </body>
+      </a>
+    `).join("");
+  </script>
+</body>
 </html>

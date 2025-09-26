@@ -1,132 +1,220 @@
+/* Fonts (fixing your original combined @font-face block) */
 @font-face {
-    font-family: BlexMono;
-    src: url(fonts/BlexMonoNerdFont-Regular.ttf) format(truetype);
-
-    font-family: swedensans;
-    src: url(fonts/Gilroy-Bold.ttf) format(truetype);
+  font-family: BlexMono;
+  src: url(fonts/BlexMonoNerdFont-Regular.ttf) format("truetype");
 }
 @font-face {
-            font-family: ss;
-            src: url(fonts/SwedenSansRegular.otf) format(truetype);
-        }
-.summary-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: #1d2125;
-    border: 1px solid #000000;
-    padding: 5px;
-    margin-bottom: 5px;
-    margin-top: 20px;
-  }
-  .profile-img {
-    width: 200px;
-    height: auto;
-    border-radius: 0%;
-    margin-right: 20px;
-    flex: 0 0 auto;
-  }
-  .profile-img img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .summary-text {
-    flex: 1;
-  }
-  .summary-text p {
-    max-width: 400px;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #d1d5da;
-    text-indent: 30px;
-    font-family: ss;
-  }
-  @media screen and (max-width: 768px) {
-    .summary-container {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
-  .dogs-section {
-    margin-top: 20px;
-    background-color: #1d2125;
-    border: 1px solid #000000;
-  }
-  .dogs-section h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  .dogs-section p {
-    font-family: ss;
-    color: #d1d5da;
-    text-align: center;
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 1fr;
-    grid-gap: 0;
-    grid-gap: 0px;
-  }
-  .gallery img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    object-position: center center;
-  }
-header {
-  position: relative;
-    background-color: #1d2125;
-    color: #d1d5da;
-    padding: 10px;
-  }
-  .github-icon img{
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 1rem;
-    width: 50px;
-    height: 50px;
-  }
-  .monogram img {
-    position: absolute;
-    top: 1em;
-    left: 1em;
-    padding: 1rem;
-    width: 100px;
-    height: auto;
-  }
-h1 {
-    font-family: ss;
-    font-size: 35;
+  font-family: gilroy;
+  src: url(fonts/Gilroy-Bold.ttf) format("truetype");
 }
-ul {
-    font-family: ss;
+@font-face {
+  font-family: ss;
+  src: url(fonts/SwedenSansRegular.otf) format("truetype");
+}
 
-    margin: 0;
-    padding: 0;
-    list-style: none;
+/* Color tokens + card list tokens (shared look with Projects page) */
+:root{
+  --bg:#24292e;
+  --panel:#1d2125;
+  --text:#d1d5da;
+  --text-muted:#aeb6c2;
+  --outline:#6ea8fe;
+  --row-border:#0f1215;
+  --row-hover:#2a3036;
+  --thumb-bg:#13161a;
+  --title:#90D5FF;
+  --row-h:160px;
+  --gap:16px;
 }
-a {
-    font-size: 25;
-    text-decoration: none;
-    color: #d1d5da;
-    display: block;
-}
-li {
-    display: inline-block;
-    margin-right: 20px;
-}
+
+/* Base */
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #24292e;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
 }
-header {
-    border-bottom: 1px solid #000000;
-    text-align: center;
+
+.github-icon img{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  width: 50px;
+  height: 50px;
+}
+.monogram img {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  padding: 1rem;
+  width: 100px;
+  height: auto;
+}
+
+/* Summary section */
+.summary-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--panel);
+  border: 1px solid #000000;
+  padding: 5px;
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+.profile-img {
+  width: 200px;
+  height: auto;
+  border-radius: 0%;
+  margin-right: 20px;
+  flex: 0 0 auto;
+}
+.profile-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.summary-text {
+  flex: 1;
+}
+.summary-text p {
+  max-width: 400px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #d1d5da;
+  text-indent: 30px;
+  font-family: ss;
+}
+@media screen and (max-width: 768px) {
+  .summary-container {
+    flex-direction: column;
+    align-items: flex-start;
   }
+}
+
+/* Featured section heading */
+.section-title{
+  max-width: 1000px;
+  /* margin: 32px auto 12px; */
+  padding: 0 2px;
+  padding-left: 20px;
+  font-family: gilroy, ss, sans-serif;
+  font-size: 1.6rem;
+  color: white;
+}
+
+/* Card list (matching Projects page styling) */
+.list {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0;
+  padding-left: 20px; /* adjust to taste */
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--row-h);
+  padding: 14px 0 14px 14px;
+  background: var(--panel);
+  border: 1px solid var(--row-border);
+  transition: transform .08s ease, box-shadow .08s ease, background .12s ease;
+  outline: 2px solid transparent;
+}
+.row:hover {
+  background: var(--row-hover);
+  outline-color: var(--outline);
+  box-shadow: 0 4px 14px rgba(0,0,0,.35);
+  transform: translateY(-1px);
+}
+.meta {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 20px;
+  min-width: 0;
+}
+.title{
+  font-family: gilroy, ss, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--title);
+}
+.desc{
+  color: var(--text-muted);
+  font-family: ss;
+  font-size: .98rem;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 80ch;
+}
+.langs{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.langs img{
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+.thumb {
+  flex: 0 0 var(--row-h);
+  height: 100%;
+  overflow: hidden;
+  background: var(--thumb-bg);
+}
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+@media (max-width: 640px){
+  .row{ height:auto; align-items:flex-start; padding:12px; flex-direction:column; }
+  .thumb{ width:100%; height:160px; flex:0 0 auto; }
+}
+
+/* Dogs section */
+.dogs-section {
+  margin-top: 20px;
+  background-color: var(--panel);
+  border: 1px solid #000000;
+}
+.dogs-section h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.dogs-section p {
+  font-family: ss;
+  color: #d1d5da;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  grid-gap: 0;
+}
+.gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center center;
+}

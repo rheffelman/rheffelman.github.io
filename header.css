@@ -1,0 +1,84 @@
+/* Fonts */
+@font-face {
+  font-family: BlexMono;
+  src: url(fonts/BlexMonoNerdFont-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: gilroy;
+  src: url(fonts/Gilroy-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: ss;
+  src: url(fonts/SwedenSansRegular.otf) format("truetype");
+}
+
+/* Global tokens */
+:root {
+  --bg:#24292e;
+  --panel:#1d2125;
+  --text:#d1d5da;
+  --text-muted:#aeb6c2;
+  --outline:#6ea8fe;
+  --row-border:#0f1215;
+  --row-hover:#2a3036;
+  --thumb-bg:#13161a;
+  --title:#90D5FF;
+  --row-h:160px;
+  --gap:16px;
+}
+
+/* Base */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ss, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Helvetica, Arial;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Header */
+header {
+  position: relative;
+  background: var(--panel);
+  color: var(--text);
+  padding: 20px;
+  border-bottom: 1px solid #000;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  font-family: ss, sans-serif;
+}
+
+header h1 a {
+  text-decoration: none;
+  color: var(--text);
+}
+
+header nav ul {
+  display: inline-flex;
+  list-style: none;
+  gap: 20px;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+header nav a {
+  font-size: 1rem;
+}
+
+.github-icon img {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+}

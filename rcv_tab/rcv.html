@@ -1,203 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
-<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RCV Data Analysis</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-MathJax = {
-    tex: {
+  <!-- Shared, uniform header + global tokens -->
+  <link rel="stylesheet" href="../header.css" />
+
+  <!-- Tableau embed (needed for <tableau-viz>) -->
+  <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+
+  <!-- MathJax (single include; keep only if you actually render LaTeX on this page) -->
+  <script>
+    window.MathJax = {
+      tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true
-    },
-    options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+
+  <style>
+    /* Page-specific styles (viz scaling only) */
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: auto; /* allow scroll */
     }
-};
-    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+    /* One wrapper per viz */
+    .viz-wrap {
+      /* set original size + scale per instance via inline CSS vars */
+      --w: 1920;       /* original dashboard width in px */
+      --h: 1080;       /* original dashboard height in px */
+      /* --scale: 0.8; */
 
-    <style>
-        @font-face {
-            font-family: BlexMono;
-            src: url(../fonts/BlexMonoNerdFont-Regular.ttf) format(truetype);
-        }
-        @font-face {
-            font-family: ss;
-            src: url(../fonts/SwedenSansRegular.otf) format(truetype);
-        }
-        @font-face {
-            font-family: gilroy;
-            src: url(../fonts/Gilroy-Bold.ttf) format(truetype);
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #24292e;
-            color: #d1d5da;
-            font-family: ss;
-            line-height: 1.8;
-        }
-        a {
-            font-size: 25;
-            text-decoration: none;
-            color: #d1d5da;
-            display: block;
-        }
-        header {
-            background-color: #1d2125;
-            color: #d1d5da;
-            padding: 20px;
-            border-bottom: 1px solid #000000;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            margin: 0;
-        }
-        header h2 {
-            font-size: 1.8rem;
-            margin: 0.5rem 0 1rem;
-        }
-        header nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        header nav li {
-            display: inline-block;
-            margin: 0 15px;
-        }
-        header nav a {
-            color: #d1d5da;
-            text-decoration: none;
-            font-size: 1rem;
-        }
-        header .github-icon img {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 50px;
-            height: 50px;
-        }
-        main {
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
+      display: flex;
+      justify-content: center;        /* center horizontally */
+      height: calc(var(--h) * 1px * var(--scale)); /* reserve scaled height */
+      margin-top: 20px;               /* spacing between vizzes */
+    }
 
-html, body {
-  height: 100%;
-  margin: 0;
-  /* allow scroll unless you intentionally want to hide overflow */
-  overflow: auto;
-}
+    /* Scaler applies transform but keeps a fixed unscaled box inside */
+    .viz-scaler {
+      width: calc(var(--w) * 1px);
+      height: calc(var(--h) * 1px);
+      transform: scale(var(--scale));
+      transform-origin: top center;
+    }
 
-/* one wrapper per viz */
-.viz-wrap {
-  /* set original size + scale per instance via inline CSS vars */
-  --w: 1920;         /* original dashboard width in px */
-  --h: 1080;         /* original dashboard height in px */
-  /* --scale: 0.75;      visual scale (0.5 = 50%) */
+    /* The actual Tableau element fills the unscaled box */
+    .viz {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
 
-  /* center horizontally */
-  display: flex;
-  justify-content: center;
-
-  /* critical: reserve the *scaled* height in layout */
-  height: calc(var(--h) * 1px * var(--scale));
-  /* optional spacing between vizzes */
-  margin-top: 20px;
-}
-
-/* scaler applies the transform but keeps a fixed unscaled box inside */
-.viz-scaler {
-  width: calc(var(--w) * 1px);
-  height: calc(var(--h) * 1px);
-  transform: scale(var(--scale));
-  transform-origin: top center;
-}
-
-/* the actual Tableau element fills the unscaled box */
-.viz {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
-
-
-
-    </style>
+    /* Optional page subtitle style (kept outside header for uniformity) */
+    .page-title {
+      max-width: 1000px;
+      margin: 24px auto 0;
+      padding: 0 16px;
+      font-family: gilroy, ss, sans-serif;
+      font-size: 1.6rem;
+      color: var(--title);
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <a class="github-icon" href="https://github.com/rheffelman/rheffelman.github.io">
-            <img src="../materials/github-mark-white.png" alt="GitHub icon">
-        </a>
-            <h1>
-                <a href="../index.html">rheffelman.github.io</a>
-            </h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../html/about.html">About</a></li>
-                <li><a href="../html/projects.html">Projects</a></li>
-            </ul>
-        </nav>
-        <h2>RCV Data Analysis</h2>
-    </header>
+  <!-- Uniform header (no per-page extras inside) -->
+  <header>
+    <a class="github-icon" href="https://github.com/rheffelman/rheffelman.github.io">
+      <img src="../materials/github-mark-white.png" alt="GitHub icon" />
+    </a>
+    <h1><a href="../index.html">rheffelman.github.io</a></h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../html/about.html">About Me</a></li>
+        <li><a href="../html/projects.html">Projects</a></li>
+      </ul>
+    </nav>
+  </header>
 
+  <!-- Page-specific title OUTSIDE the header to keep header uniform -->
+  <div class="page-title">RCV Data Analysis</div>
 
-<!-- Viz 1 -->
-<div class="viz-wrap" style="--w:1920; --h:1080; --scale:0.8;">
-  <div class="viz-scaler">
-    <tableau-viz
-      class="viz"
-      src="https://public.tableau.com/views/FinalProjectHeffelmanRyan/TheData?:showVizHome=no&:embed=true"
-      toolbar="bottom"
-      hide-tabs
-      loading="eager">
-    </tableau-viz>
+  <!-- Viz 1 -->
+  <div class="viz-wrap" style="--w:1920; --h:1080; --scale:0.8;">
+    <div class="viz-scaler">
+      <tableau-viz
+        class="viz"
+        src="https://public.tableau.com/views/FinalProjectHeffelmanRyan/TheData?:showVizHome=no&:embed=true"
+        toolbar="bottom"
+        hide-tabs
+        loading="eager">
+      </tableau-viz>
+    </div>
   </div>
-</div>
 
-<!-- Viz 2 -->
-<div class="viz-wrap" style="--w:1920; --h:1080; --scale:0.8;">
-  <div class="viz-scaler">
-    <tableau-viz
-      class="viz"
-      src="https://public.tableau.com/views/FinalProjectHeffelmanRyan/VotingSystemTabulations?:showVizHome=no&:embed=true"
-      toolbar="bottom"
-      hide-tabs
-      loading="eager">
-    </tableau-viz>
+  <!-- Viz 2 -->
+  <div class="viz-wrap" style="--w:1920; --h:1080; --scale:0.8;">
+    <div class="viz-scaler">
+      <tableau-viz
+        class="viz"
+        src="https://public.tableau.com/views/FinalProjectHeffelmanRyan/VotingSystemTabulations?:showVizHome=no&:embed=true"
+        toolbar="bottom"
+        hide-tabs
+        loading="eager">
+      </tableau-viz>
+    </div>
   </div>
-</div>
-
-
-
-<script>
-    MathJax = {
-        tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']],
-            displayMath: [['$$', '$$'], ['\\[', '\\]']],
-            processEscapes: true
-        },
-        options: {
-            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-        }
-    };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
-
-
 </body>
 </html>

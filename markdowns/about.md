@@ -24,5 +24,5 @@ Computer Scientist/Data Scientist
 - My favorite video game is Factorio.
 - I can solve Rubik's cubes and other twisty-puzzles really fast. https://www.worldcubeassociation.org/persons/2017HEFF01
 - My favorite set is $\{x \in S \vert 1 \leq x \leq 2^{64}\}$.
-- My favorite binary operation is bitwise XOR.
+- My favorite binary operation is logical conjunction.
 - My favorite philosopher is Socrates.
