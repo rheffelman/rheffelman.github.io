@@ -171,18 +171,25 @@ MathJax = {
             background-color: #444;
             border-radius: 4px;
         }
-          #viz-container {
-    width: 100%;
-    background-color: #1d2125;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,.3);
-    overflow: hidden;
-  }
-  tableau-viz {
-    display: block;
-    width: 100%;
-    min-height: 70vh; /* give it some height */
-  }
+#viz-container {
+  width: 100%;
+  max-width: 1200px;        /* optional cap */
+  margin: 0 auto;
+  background: #1d2125;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,.3);
+  overflow: hidden;         /* no scrollbars inside the container */
+}
+
+/* Match your dashboard’s actual pixel ratio from Tableau (Width/Height) */
+tableau-viz {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1200 / 800; /* <-- change to your dashboard’s size */
+  height: auto;             /* computed from width + aspect-ratio */
+  border: 0;
+}
+
     </style>
 </head>
 <body>
@@ -204,7 +211,6 @@ MathJax = {
         <h2>About</h2>
     </header>
 
-<!-- 2) Replace the current main with this -->
 <main>
   <div id="viz-container">
     <tableau-viz
@@ -214,11 +220,6 @@ MathJax = {
       hide-tabs
       loading="eager">
     </tableau-viz>
-    <noscript>
-      <iframe
-        src="https://public.tableau.com/views/FinalProjectHeffelmanRyan/TheData?:showVizHome=no&:embed=true"
-        width="100%" height="100%" frameborder="0"></iframe>
-    </noscript>
   </div>
 </main>
 
