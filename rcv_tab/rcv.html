@@ -171,24 +171,39 @@ MathJax = {
             background-color: #444;
             border-radius: 4px;
         }
-#viz-container {
-  width: 100%;
-  max-width: 1200px;        /* optional cap */
-  margin: 0 auto;
+/* Make the main area exactly the viewport minus header, no scrollbars */
+html, body { height: 100%; }
+body { overflow: hidden; }  /* kill page scrollbars */
+main { padding: 0; }
+
+/* The area we can draw into (fills the viewport minus header) */
+#viz-outer {
+  --header-h: 0px;           /* set by JS after it measures the header */
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - var(--header-h));
+  overflow: hidden;
+  display: grid;
+  place-items: center;       /* center the scaled viz */
   background: #1d2125;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,.3);
-  overflow: hidden;         /* no scrollbars inside the container */
 }
 
-/* Match your dashboard’s actual pixel ratio from Tableau (Width/Height) */
-tableau-viz {
+/* The native-size wrapper (use your dashboard’s actual fixed size) */
+#viz-scale {
+  width: 1920px;             /* <-- native width */
+  height: 1080px;             /* <-- native height */
+  transform-origin: top left;
+}
+
+/* Let tableau fill the native-size box */
+#viz {
   display: block;
   width: 100%;
-  aspect-ratio: 1920 / 1080; /* <-- change to your dashboard’s size */
-  height: auto;             /* computed from width + aspect-ratio */
+  height: 100%;
   border: 0;
 }
+
 
     </style>
 </head>
@@ -203,25 +218,28 @@ tableau-viz {
         <nav>
             <ul>
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="../about.html">About</a></li>
-                <li><a href="../articles.html">Articles</a></li>
-                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../html/about.html">About</a></li>
+                <li><a href="../html/articles.html">Articles</a></li>
+                <li><a href="../html/projects.html">Projects</a></li>
             </ul>
         </nav>
         <h2>About</h2>
     </header>
 
 <main>
-  <div id="viz-container">
-    <tableau-viz
-      id="viz"
-      src="https://public.tableau.com/views/FinalProjectHeffelmanRyan/TheData?:showVizHome=no&:embed=true"
-      toolbar="bottom"
-      hide-tabs
-      loading="eager">
-    </tableau-viz>
+  <div id="viz-outer">
+    <div id="viz-scale">
+      <tableau-viz
+        id="viz"
+        src="https://public.tableau.com/views/FinalProjectHeffelmanRyan/TheData?:showVizHome=no&:embed=true"
+        toolbar="bottom"
+        hide-tabs
+        loading="eager">
+      </tableau-viz>
+    </div>
   </div>
 </main>
+
 
 
 
