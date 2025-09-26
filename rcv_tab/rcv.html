@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
+<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
@@ -191,9 +192,24 @@ MathJax = {
         <h2>About</h2>
     </header>
 
-    <main>
-        <div id="markdown-content"></div>
-    </main>
+<!-- 2) Replace the current main with this -->
+<main>
+  <div id="viz-container">
+    <tableau-viz
+      id="viz"
+      src="https://public.tableau.com/app/profile/ryan.heffelman/viz/FinalProjectHeffelmanRyan/TheData"
+      toolbar="bottom"
+      hide-tabs
+      loading="eager">
+    </tableau-viz>
+    <noscript>
+      <iframe
+        src="https://public.tableau.com/app/profile/ryan.heffelman/viz/FinalProjectHeffelmanRyan/TheData?:showVizHome=no&:embed=true"
+        width="100%" height="800" frameborder="0"></iframe>
+    </noscript>
+  </div>
+</main>
+
 
 <script>
     MathJax = {
@@ -209,29 +225,7 @@ MathJax = {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const converter = new showdown.Converter({
-            tables: true,
-            simplifiedAutoLink: true,
-            strikethrough: true,
-            tasklists: true
-        });
 
-        fetch('../markdowns/about.md')
-            .then(response => response.text())
-            .then(markdown => {
-                const html = converter.makeHtml(markdown);
-                const contentElement = document.getElementById('markdown-content');
-                contentElement.innerHTML = html;
-
-                MathJax.startup.promise.then(() => {
-                    MathJax.typeset([contentElement]);
-                }).catch(err => console.error('MathJax rendering error:', err));
-            })
-            .catch(err => console.error('Error fetching Markdown:', err));
-    });
-</script>
 
 </body>
 </html>
