@@ -1,264 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQ</title>
 
-    <!-- MathJax for LaTeX rendering -->
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-MathJax = {
-    tex: {
+  <!-- Shared, uniform header + global tokens -->
+  <link rel="stylesheet" href="../header.css"/>
+
+  <!-- MathJax (only if you actually use LaTeX in the markdown) -->
+  <script>
+    window.MathJax = {
+      tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true // Allows escaping dollar signs
-    },
-    options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        processEscapes: true
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+
+  <!-- Showdown for Markdown → HTML -->
+  <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js" defer></script>
+
+  <style>
+    /* Page-specific styles (mirrors the first page approach) */
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: visible; /* allow scroll like first page */
     }
-};
-    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+    .page-title {
+      max-width: 1000px;
+      margin: 24px auto 0;
+      padding: 0 16px;
+      font-family: gilroy, ss, sans-serif;
+      font-size: 1.6rem;
+      color: var(--title);
+      text-align: center;
+    }
 
-    <style>
-        @font-face {
-            font-family: BlexMono;
-            src: url(fonts/BlexMonoNerdFont-Regular.ttf) format(truetype);
-        }
-        @font-face {
-            font-family: ss;
-            src: url(fonts/SwedenSansRegular.otf) format(truetype);
-        }
+    /* Markdown container: centered card-like panel */
+    .md-wrap {
+      max-width: 1000px;
+      margin: 20px auto 60px; /* space under header + footer room */
+      padding: 0 16px;
+    }
+    #markdown-content {
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 22px;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
 
-        @font-face {
-            font-family: gilroy;
-            src: url(../fonts/Gilroy-Bold.ttf) format(truetype);
-        }
+    /* Markdown typography */
+    #markdown-content h1,
+    #markdown-content h2,
+    #markdown-content h3,
+    #markdown-content h4 {
+      color: var(--title);
+      margin: 1.2rem 0 .6rem;
+      font-family: gilroy, ss, ui-sans-serif, system-ui;
+    }
+    #markdown-content p { margin: 1rem 0; }
+    #markdown-content ul,
+    #markdown-content ol {
+      margin: .6rem 0 .6rem 1.25rem;
+      padding-left: 1rem;
+    }
+    #markdown-content li { margin: .35rem 0; }
 
-        /* General Body Styling */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #24292e;
-            color: #d1d5da;
-            font-family: ss;
-            line-height: 1.8;
-        }
+    #markdown-content a { text-decoration: underline; }
 
-        /* Header Styling */
-        header {
-            background-color: #1d2125;
-            color: #d1d5da;
-            padding: 20px;
-            border-bottom: 1px solid #000000;
-            text-align: center;
-        }
+    #markdown-content code,
+    #markdown-content pre code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .15rem .35rem;
+    }
+    #markdown-content pre {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .75rem 1rem;
+      overflow-x: auto;
+    }
 
-        header h1 {
-            font-size: 2.5rem;
-            margin: 0;
-        }
+    #markdown-content blockquote {
+      border-left: 4px solid var(--accent, #1a73e8);
+      padding-left: 14px;
+      margin: 1rem 0;
+      color: var(--muted);
+    }
 
-        header h2 {
-            font-size: 1.8rem;
-            margin: 0.5rem 0 1rem;
-        }
-
-        header nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        header nav li {
-            display: inline-block;
-            margin: 0 15px;
-        }
-
-        header nav a {
-            color: #d1d5da;
-            text-decoration: none;
-            font-size: 1rem;
-        }
-
-        header .github-icon img {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 50px;
-            height: 50px;
-        }
-
-        /* Main Content Styling */
-        main {
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        #markdown-content {
-            width: 100%;
-            max-width: 800px;
-            background-color: #1d2125;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            color: #d1d5da;
-            font-family: ss;
-            overflow-x: auto; /* Enable horizontal scrolling */
-        }
-
-        /* Markdown-specific Styles */
-        #markdown-content h1,
-        #markdown-content h2,
-        #markdown-content h3 {
-            color: #ffffff;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        #markdown-content p {
-            margin: 1rem 0;
-        }
-
-        #markdown-content ul,
-        #markdown-content ol {
-            list-style: initial;
-            margin-left: 20px;
-            padding-left: 20px;
-        }
-
-        #markdown-content li {
-            margin-bottom: 0.5rem;
-            text-align: left;
-        }
-
-        #markdown-content a {
-            color: #1a73e8;
-            text-decoration: underline;
-        }
-
-        #markdown-content img {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            margin: 10px auto;
-            border-radius: 5px;
-        }
-
-        #markdown-content code {
-            background-color: #2d333b;
-            color: #ffffff;
-            padding: 2px 4px;
-            border-radius: 4px;
-            font-family: ss;
-        }
-
-        #markdown-content blockquote {
-            border-left: 4px solid #1a73e8;
-            padding-left: 15px;
-            color: #b0b7c3;
-            margin: 1rem 0;
-        }
-
-        /* Table Styling */
-        #markdown-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-            display: block;
-            overflow-x: auto; /* Enable horizontal scrolling */
-        }
-
-        #markdown-content th,
-        #markdown-content td {
-            border: 1px solid #444;
-            padding: 8px 12px;
-            text-align: left;
-        }
-
-        #markdown-content th {
-            background-color: #2d333b;
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        #markdown-content table::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        #markdown-content table::-webkit-scrollbar-thumb {
-            background-color: #444;
-            border-radius: 4px;
-        }
-    </style>
+    /* Tables */
+    #markdown-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      display: block;      /* wrap in block to enable horizontal scroll on small screens */
+      overflow-x: auto;
+    }
+    #markdown-content th,
+    #markdown-content td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    #markdown-content th {
+      background: rgba(255,255,255,0.04);
+      font-weight: 700;
+    }
+    #markdown-content img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 10px auto;
+      border-radius: 6px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <a class="github-icon" href="https://github.com/rheffelman/rheffelman.github.io">
-            <img src="../materials/github-mark-white.png" alt="GitHub icon">
-        </a>
-        <h1>Ryan Heffelman</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="portfolio/portfolio.html">Art Portfolio</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="WMD.html">WMD</a></li>
-                <li><a href="correlations.html">Correlations</a></li>
-                <li><a href="RCV_case_study.html">RCV Case Study</a></li>
-                <li><a href="FAQ.html">FAQ</a></li>
-            </ul>
-        </nav>
-        <h2>FAQ</h2>
-    </header>
+  <!-- Uniform header (copied structure from the first page) -->
+  <header>
+    <a class="github-icon" href="https://github.com/rheffelman/rheffelman.github.io">
+      <img src="../materials/github-mark-white.png" alt="GitHub icon"/>
+    </a>
+    <h1><a href="../index.html">rheffelman.github.io</a></h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../html/about.html">About Me</a></li>
+        <li><a href="../html/projects.html">Projects</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <div id="markdown-content"></div>
-    </main>
+  <!-- Page-specific title OUTSIDE the header to keep header uniform -->
+  <div class="page-title">FAQ</div>
 
-<script>
-    MathJax = {
-        tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']],
-            displayMath: [['$$', '$$'], ['\\[', '\\]']],
-            processEscapes: true
-        },
-        options: {
-            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-        }
-    };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const converter = new showdown.Converter({
-            tables: true,
-            simplifiedAutoLink: true,
-            strikethrough: true,
-            tasklists: true
+  <!-- Markdown content card -->
+  <div class="md-wrap">
+    <div id="markdown-content">Loading…</div>
+  </div>
+
+  <script>
+    // Run after Showdown loads
+    window.addEventListener('DOMContentLoaded', () => {
+      const converter = new showdown.Converter({
+        tables: true,
+        simplifiedAutoLink: true,
+        strikethrough: true,
+        tasklists: true
+      });
+
+      fetch('../markdowns/FAQ.md')   // adjust path if your FAQ.html lives elsewhere
+        .then(r => r.text())
+        .then(md => {
+          const html = converter.makeHtml(md);
+          const el = document.getElementById('markdown-content');
+          el.innerHTML = html;
+
+          if (window.MathJax && MathJax.startup) {
+            MathJax.startup.promise.then(() => MathJax.typeset([el]));
+          }
+        })
+        .catch(err => {
+          console.error('Error fetching Markdown:', err);
+          document.getElementById('markdown-content').textContent = 'Failed to load FAQ.md';
         });
-
-        fetch('markdowns/FAQ.md')
-            .then(response => response.text())
-            .then(markdown => {
-                const html = converter.makeHtml(markdown);
-                const contentElement = document.getElementById('markdown-content');
-                contentElement.innerHTML = html;
-
-                // Wait for MathJax to initialize, then render
-                MathJax.startup.promise.then(() => {
-                    MathJax.typeset([contentElement]);
-                }).catch(err => console.error('MathJax rendering error:', err));
-            })
-            .catch(err => console.error('Error fetching Markdown:', err));
     });
-</script>
-
+  </script>
 </body>
 </html>
