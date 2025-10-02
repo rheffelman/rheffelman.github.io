@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQ (PDF)</title>
+
+  <!-- Shared, uniform header + global tokens -->
+  <link rel="stylesheet" href="../header.css"/>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    .page-title {
+      max-width: 1000px;
+      margin: 24px auto 0;
+      padding: 0 16px;
+      font-family: gilroy, ss, sans-serif;
+      font-size: 1.6rem;
+      color: var(--title);
+      text-align: center;
+    }
+
+    /* PDF container styled like your markdown card */
+    .pdf-wrap {
+      max-width: 1000px;
+      margin: 20px auto 60px;
+      padding: 0 16px;
+    }
+
+    .pdf-card {
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden; /* clip internal viewer corners */
+    }
+
+    /* The inline PDF viewer */
+    .pdf-view {
+      width: 100%;
+      height: 80vh;          /* gets overridden by JS for exact fit */
+      border: none;
+      display: block;
+      background: var(--panel);
+    }
+
+    /* Fallback text inside <object> if PDF can't render inline */
+    .fallback {
+      padding: 16px 20px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    /* Optional: keep long pages from horizontal scrollbars */
+    body { overflow-x: hidden; }
+  </style>
+</head>
+<body>
+  <!-- Uniform header (same structure as your other pages) -->
+  <header>
+    <a class="github-icon" href="https://github.com/rheffelman/rheffelman.github.io">
+      <img src="../materials/github-mark-white.png" alt="GitHub icon"/>
+    </a>
+    <h1><a href="../index.html">rheffelman.github.io</a></h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../html/about.html">About Me</a></li>
+        <li><a href="../html/projects.html">Projects</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Page-specific title outside the header -->
+  <div class="page-title">FAQ (PDF)</div>
+
+  <!-- PDF content card -->
+  <div class="pdf-wrap">
+    <div class="pdf-card">
+      <!-- Use either iframe OR object. The <object> has a built-in fallback. -->
+
+      <!-- Option A: iframe (simple, reliable) -->
+      <iframe
+        id="pdfFrame"
+        class="pdf-view"
+        src="markdowns/poker.pdf"
+      ></iframe>
+
+      <!-- Option B: object (uncomment if you prefer) -->
+      <!--
+      <object id="pdfObject" class="pdf-view" data="../pdfs/FAQ.pdf" type="application/pdf">
+        <div class="fallback">
+          Your browser doesn’t support inline PDFs.
+          <a href="../pdfs/FAQ.pdf" download>Download the PDF</a>.
+        </div>
+      </object>
+      -->
+    </div>
+  </div>
+
+  <script>
+    // Auto-size the PDF viewer to fill the remaining viewport under the header/title
+    function fitPDF() {
+      const viewer = document.getElementById('pdfFrame') || document.getElementById('pdfObject');
+      if (!viewer) return;
+      const rect = viewer.getBoundingClientRect();
+      // Leave a small bottom margin (24px) to avoid touching the viewport edge
+      const available = Math.max(200, window.innerHeight - rect.top - 24);
+      viewer.style.height = available + 'px';
+    }
+    window.addEventListener('load', fitPDF);
+    window.addEventListener('resize', fitPDF);
+  </script>
+</body>
+</html>
