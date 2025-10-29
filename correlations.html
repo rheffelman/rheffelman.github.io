@@ -161,7 +161,7 @@
       });
 
       // Adjust path if this file lives in a different folder
-      fetch('../markdowns/correlations.md')
+      fetch('./SURE/SURE.md')
         .then(r => r.text())
         .then(md => {
           const html = converter.makeHtml(md);
