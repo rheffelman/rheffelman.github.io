@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catenaries</title>
+  <title>RCV Data Analysis</title>
 
   <!-- Shared, uniform header + global tokens -->
-  <link rel="stylesheet" href="../header.css"/>
+  <link rel="stylesheet" href="./header.css"/>
 
-  <!-- MathJax (only if you actually use LaTeX in the markdown) -->
+  <!-- Tableau embed -->
+  <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+
+  <!-- MathJax (only if you actually use LaTeX in this page) -->
   <script>
     window.MathJax = {
       tex: {
@@ -21,11 +24,10 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
 
-  <!-- Showdown for Markdown → HTML -->
+  <!-- Markdown converter -->
   <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js" defer></script>
 
   <style>
-    /* Page-specific styles to match the FAQ page structure */
     html, body {
       height: 100%;
       margin: 0;
@@ -74,7 +76,6 @@
       padding-left: 1rem;
     }
     #markdown-content li { margin: .35rem 0; }
-
     #markdown-content a { text-decoration: underline; }
 
     #markdown-content code,
@@ -100,30 +101,29 @@
       color: var(--muted);
     }
 
-    /* Tables */
-    #markdown-content table {
+    /* Tableau viz styling */
+    .viz-wrap {
+      --w: 1920;
+      --h: 1080;
+      --scale: 0.5;
+      display: flex;
+      justify-content: center;
+      height: calc(var(--h) * 1px * var(--scale));
+      margin: 30px 0;
+    }
+
+    .viz-scaler {
+      width: calc(var(--w) * 1px);
+      height: calc(var(--h) * 1px);
+      transform: scale(var(--scale));
+      transform-origin: top center;
+    }
+
+    .viz {
       width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
+      height: 100%;
+      border: none;
       display: block;
-      overflow-x: auto;
-    }
-    #markdown-content th,
-    #markdown-content td {
-      border: 1px solid var(--border);
-      padding: 8px 12px;
-      text-align: left;
-    }
-    #markdown-content th {
-      background: rgba(255,255,255,0.04);
-      font-weight: 700;
-    }
-    #markdown-content img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      margin: 10px auto;
-      border-radius: 6px;
     }
   </style>
 </head>
@@ -143,10 +143,10 @@
     </nav>
   </header>
 
-  <!-- Page-specific title OUTSIDE the header to keep header uniform -->
-  <div class="page-title">Catenaries</div>
+  <!-- Page-specific title -->
+  <div class="page-title">RCV Data Analysis</div>
 
-  <!-- Markdown content card -->
+  <!-- Markdown container -->
   <div class="md-wrap">
     <div id="markdown-content">Loading…</div>
   </div>
@@ -160,21 +160,66 @@
         tasklists: true
       });
 
-      // Adjust path if this file lives in a different folder
-      fetch('./SURE/SURE.md')
+      fetch('./markdowns/rcv.md')
         .then(r => r.text())
         .then(md => {
-          const html = converter.makeHtml(md);
+          // Convert Markdown to HTML
+          let html = converter.makeHtml(md);
+
+          // Replace Tableau URLs with embedded dashboards
+          html = html
+            .replace(
+              /https:\/\/public\.tableau\.com\/views\/FinalProjectHeffelmanRyan\/TheData[^\s)"]*/g,
+              `<div class="viz-wrap" style="--scale:0.5;">
+                <div class="viz-scaler">
+                  <tableau-viz class="viz"
+                    src="https://public.tableau.com/views/FinalProjectHeffelmanRyan/TheData?:showVizHome=no&:embed=true"
+                    toolbar="bottom"
+                    hide-tabs
+                    loading="eager">
+                  </tableau-viz>
+                </div>
+              </div>`
+            )
+            .replace(
+              /https:\/\/public\.tableau\.com\/views\/FinalProjectHeffelmanRyan\/VotingSystemTabulations[^\s)"]*/g,
+              `<div class="viz-wrap" style="--scale:0.5;">
+                <div class="viz-scaler">
+                  <tableau-viz class="viz"
+                    src="https://public.tableau.com/views/FinalProjectHeffelmanRyan/VotingSystemTabulations?:showVizHome=no&:embed=true"
+                    toolbar="bottom"
+                    hide-tabs
+                    loading="eager">
+                  </tableau-viz>
+                </div>
+              </div>`
+            )
+            .replace(
+              /https:\/\/public\.tableau\.com\/views\/FinalProjectHeffelmanRyan\/PairwiseComparisons[^\s)"]*/g,
+              `<div class="viz-wrap" style="--scale:0.5;">
+                <div class="viz-scaler">
+                  <tableau-viz class="viz"
+                    src="https://public.tableau.com/views/FinalProjectHeffelmanRyan/PairwiseComparisons?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
+                    toolbar="bottom"
+                    hide-tabs
+                    loading="eager">
+                  </tableau-viz>
+                </div>
+              </div>`
+            );
+
+          // Insert rendered HTML
           const el = document.getElementById('markdown-content');
           el.innerHTML = html;
 
+          // Re-render MathJax if needed
           if (window.MathJax && MathJax.startup) {
             MathJax.startup.promise.then(() => MathJax.typeset([el]));
           }
         })
         .catch(err => {
           console.error('Error fetching Markdown:', err);
-          document.getElementById('markdown-content').textContent = 'Failed to load SURE.md';
+          document.getElementById('markdown-content').textContent = 'Failed to load RCVDataAnalysis.md';
         });
     });
   </script>
